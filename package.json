@@ -7,9 +7,11 @@
     "test": "test"
   },
   "dependencies": {
+    "dotenv": "^8.0.0",
     "openzeppelin-solidity": "^2.3.0",
     "retry": "^0.12.0",
     "truffle": "^5.0.27",
+    "truffle-hdwallet-provider": "^1.0.16",
     "web3": "1.0.0-beta.37"
   },
   "devDependencies": {},

@@ -4,11 +4,11 @@ import * as Yup from "yup";
 
 import { authenticationService } from "@/_services";
 
-const LoginPage = ({ props }) => {
+const LoginPage = ({ history, location }) => {
   // redirect to home if already logged in
-  // if (authenticationService.currentUserValue) {
-  //     this.props.history.push('/');
-  // }
+  if (authenticationService.currentUserValue) {
+    history.push("/");
+  }
   return (
     <div>
       <div className="alert alert-info">
@@ -30,10 +30,10 @@ const LoginPage = ({ props }) => {
           setStatus();
           authenticationService.login(username, password).then(
             user => {
-              const { from } = this.props.location.state || {
+              const { from } = location.state || {
                 from: { pathname: "/" }
               };
-              this.props.history.push(from);
+              history.push(from);
             },
             error => {
               setSubmitting(false);

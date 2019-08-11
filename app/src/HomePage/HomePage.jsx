@@ -1,38 +1,38 @@
-import React from 'react';
+import React from "react";
 
-import { userService, authenticationService } from '@/_services';
+import { userService, authenticationService, toadService } from "@/_services";
 
 class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: authenticationService.currentUserValue,
+      toads: null
+    };
+  }
 
-        this.state = {
-            currentUser: authenticationService.currentUserValue,
-            users: null
-        };
-    }
+  componentDidMount() {
+    toadService.getYours().then(toads => this.setState({ toads }));
+  }
 
-    componentDidMount() {
-        userService.getAll().then(users => this.setState({ users }));
-    }
-
-    render() {
-        const { currentUser, users } = this.state;
-        return (
-            <div>
-                <h1>Hi {currentUser.firstName}!</h1>
-                <p>You're logged in with React & JWT!!</p>
-                <h3>Users from secure api end point:</h3>
-                {users &&
-                    <ul>
-                        {users.map(user =>
-                            <li key={user.id}>{user.firstName} {user.lastName}</li>
-                        )}
-                    </ul>
-                }
-            </div>
-        );
-    }
+  render() {
+    const { currentUser, toads } = this.state;
+    return (
+      <div>
+        {" "}
+        <h1>Hi {currentUser.raptorname}!</h1>
+        {toads && (
+          <ul>
+            {toads.map(toad => (
+              <li key={toad.id}>
+                {toad.id} {toad.qrId}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  }
 }
 
 export { HomePage };
