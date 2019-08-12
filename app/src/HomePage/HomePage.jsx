@@ -2,6 +2,8 @@ import React from "react";
 
 import { userService, authenticationService, toadService } from "@/_services";
 
+// move web3 service here or to its own QR component
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);

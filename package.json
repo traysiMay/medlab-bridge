@@ -10,11 +10,14 @@
     "dotenv": "^8.0.0",
     "openzeppelin-solidity": "^2.3.0",
     "retry": "^0.12.0",
+    "styled-components": "^4.3.2",
     "truffle": "^5.0.27",
     "truffle-hdwallet-provider": "^1.0.16",
-    "web3": "1.0.0-beta.37"
+    "web3": "^1.0.0-beta.37"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/styled-components": "^4.1.18"
+  },
   "scripts": {
     "test": "truffle test"
   },
