@@ -1,27 +1,27 @@
-import React from "react";
+import React from 'react'
 
-import { userService, authenticationService, toadService } from "@/_services";
+import { userService, authenticationService, toadService } from '@/_services'
 
 // move web3 service here or to its own QR component
 
-class HomePage extends React.Component {
+class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       currentUser: authenticationService.currentUserValue,
-      toads: null
-    };
+      toads: null,
+    }
   }
 
   componentDidMount() {
-    toadService.getYours().then(toads => this.setState({ toads }));
+    // toadService.getYours().then(toads => this.setState({ toads }));
   }
 
   render() {
-    const { currentUser, toads } = this.state;
+    const { currentUser, toads } = this.state
     return (
       <div>
-        {" "}
+        {' '}
         <h1>Hi {currentUser.raptorname}!</h1>
         {toads && (
           <ul>
@@ -33,8 +33,8 @@ class HomePage extends React.Component {
           </ul>
         )}
       </div>
-    );
+    )
   }
 }
 
-export { HomePage };
+export { Home }

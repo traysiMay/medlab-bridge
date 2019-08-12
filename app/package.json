@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --port 5000 --hot --host 0.0.0.0"
   },
   "dependencies": {
     "dotenv": "^8.0.0",
