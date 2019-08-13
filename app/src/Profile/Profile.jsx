@@ -1,24 +1,24 @@
-import React from "react";
-import { Header, HomeContainer } from "@/_styles/basic";
-import { authenticationService, toadService } from "@/_services";
+import React from 'react'
+import { Header, ProfileContainer } from '@/_styles/basic'
+import { authenticationService, toadService } from '@/_services'
 
 // move web3 service here or to its own QR component
 
 class Profile extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       currentUser: authenticationService.currentUserValue,
-      toads: null
-    };
+      toads: null,
+    }
   }
 
   componentDidMount() {
-    toadService.getYours().then(toads => this.setState({ toads }));
+    toadService.getYours().then(toads => this.setState({ toads }))
   }
 
   render() {
-    const { currentUser, toads } = this.state;
+    const { currentUser, toads } = this.state
     return (
       <ProfileContainer>
         <Header>Hi {currentUser.raptorname}!</Header>
@@ -32,8 +32,8 @@ class Profile extends React.Component {
           </ul>
         )}
       </ProfileContainer>
-    );
+    )
   }
 }
 
-export { Profile };
+export { Profile }
