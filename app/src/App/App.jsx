@@ -1,49 +1,53 @@
-import React from 'react'
-import { Router, Route, Link } from 'react-router-dom'
+import React from "react";
+import { Router, Route, Link } from "react-router-dom";
 
-import { history } from '@/_helpers'
-import { authenticationService, web3Service } from '@/_services'
-import { PrivateRoute } from '@/_components'
-import { Home } from '@/Home'
-import { Login } from '@/Login'
-import { Register } from '@/Register'
-import { Nav } from '@/Nav'
+import { history } from "@/_helpers";
+import { authenticationService, web3Service } from "@/_services";
+
+import { PrivateRoute } from "@/_components";
+
+import { Home } from "@/Home";
+import { Profile } from "@/Profile";
+import { Login } from "@/Login";
+import { Register } from "@/Register";
+import { Nav } from "@/Nav";
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      currentUser: null,
-    }
+      currentUser: null
+    };
   }
 
   componentDidMount() {
     authenticationService.currentUser.subscribe(x =>
-      this.setState({ currentUser: x }),
-    )
+      this.setState({ currentUser: x })
+    );
   }
 
   logout() {
-    authenticationService.logout()
-    history.push('/login')
+    authenticationService.logout();
+    history.push("/login");
   }
 
   render() {
-    const { currentUser } = this.state
+    const { currentUser } = this.state;
     return (
       <Router history={history}>
         <div>
-          <Nav logout={this.logout} />
+          {currentUser && <Nav logout={this.logout} />}
           <div>
-            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/" component={Profile} />
+            <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </div>
         </div>
       </Router>
-    )
+    );
   }
 }
 
-export { App }
+export { App };
