@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, Link } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 
 import { history } from '@/_helpers'
 import { authenticationService, web3Service } from '@/_services'
@@ -40,7 +40,7 @@ class App extends React.Component {
           {currentUser && <Nav logout={this.logout} />}
           <div>
             <PrivateRoute exact path="/" component={Profile} />
-            <Route path={`/home/:fgfgf`} component={Home} />
+            <Route path={['/home/:id']} component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </div>
