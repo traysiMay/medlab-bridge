@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack')
 const Uglify = require('uglifyjs-webpack-plugin')
 var JavaScriptObfuscator = require('webpack-obfuscator')
 const TerserPlugin = require('terser-webpack-plugin')
-
+const webpack = require('webpack')
 module.exports = {
   mode: 'development',
   resolve: {
@@ -32,6 +32,7 @@ module.exports = {
       template: './src/index.html',
     }),
     new Dotenv(),
+    new webpack.ContextReplacementPlugin(/.*/),
     // new JavaScriptObfuscator({
     //   rotateUnicodeArray: true
     // })
