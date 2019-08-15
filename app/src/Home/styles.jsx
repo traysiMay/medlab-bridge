@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.div``;
+
+const MessageContainer = styled.div`
   font-size: 4rem;
 `;
 
-const MessageWrapper = styled.div`
-  margin: 40rem;
-`;
+const MessageWrapper = styled.div``;
 
 const Button = styled.div`
+  font-size: 3rem;
   font-family: monospace;
   font-weight: bold;
   width: 16rem;
@@ -27,4 +28,4 @@ const Button = styled.div`
   }
 `;
 
-export { HomeContainer, MessageWrapper, Button };
+export { HomeContainer, MessageContainer, MessageWrapper, Button };
