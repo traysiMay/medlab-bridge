@@ -40,7 +40,7 @@ class App extends React.Component {
           {currentUser && <Nav logout={this.logout} />}
           <div>
             <PrivateRoute exact path="/" component={Profile} />
-            <Route path={["/home", "/home/:id"]} component={Home} />
+            <Route path={["/home/:stato", "/home"]} component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </div>

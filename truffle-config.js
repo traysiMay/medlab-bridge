@@ -6,12 +6,7 @@ const kaleidoCred = fs
   .trim();
 require("dotenv").config();
 const HDWalletProvider = require("truffle-hdwallet-provider");
-// const prkey = [
-//   "f3df4219079170d44e40adfce0d5aa1e0a219bbdcbff637be3da4f38cbf59b5d"
-// ];
 const prkey = [process.env.GEORDI_KEY];
-console.log("hi");
-console.log(process.env.GEORDI_KEY);
 module.exports = {
   contracts_build_directory: "./app/src/contracts",
   // See <http://truffleframework.com/docs/advanced/configuration>
