@@ -7,10 +7,11 @@ import { authenticationService, web3Service } from "@/_services";
 import { PrivateRoute } from "@/_components";
 
 import { Home } from "@/Home";
+import { Nav } from "@/Nav";
 import { Profile } from "@/Profile";
 import { Login } from "@/Login";
 import { Register } from "@/Register";
-import { Nav } from "@/Nav";
+import { RSVP } from "@/RSVP";
 
 class App extends React.Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class App extends React.Component {
             <Route path={["/home/:stato", "/home"]} component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/rsvp" component={RSVP} />
           </div>
         </div>
       </HashRouter>

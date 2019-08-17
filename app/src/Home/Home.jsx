@@ -166,12 +166,15 @@ const Home = ({ history, match }) => {
           {showFinish && (
             <ButtonContainer>
               <Header>CHOOSE YOUR PATH</Header>
-              <Button>JOIN THE LAB</Button>
-              <Button>RSVP</Button>
+              <Button onClick={() => history.push("/register")}>
+                JOIN THE LAB
+              </Button>
+              <Button onClick={() => history.push("/rsvp")}>RSVP</Button>
               <Button
                 onClick={() =>
                   (window.location = "https://en.wikipedia.org/wiki/Bread")
                 }
+                style={{ width: "72.4%" }}
               >
                 LEARN ABOUT BREAD
               </Button>
