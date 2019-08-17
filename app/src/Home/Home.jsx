@@ -124,7 +124,6 @@ const Home = ({ history, match }) => {
         if (time > 2800) {
           step = 2;
           moonLines.setAttribute("opacity", 1);
-          console.log(time);
           if (time > 2830) {
             valenciaRoom.style.opacity = 1;
             names.style.opacity = 1;
@@ -137,7 +136,7 @@ const Home = ({ history, match }) => {
             loopTextEls(medlab, "fill", "white");
           }
           if (time > 2850) {
-            const scalar = 100;
+            const scalar = 0.001;
             svg.setAttribute("transform", `scale(${(scale += -scalar)})`);
             if (scale < -6) {
               svg.remove();
@@ -147,7 +146,7 @@ const Home = ({ history, match }) => {
           }
         }
 
-        time += 1000;
+        time += 1;
         requestAnimationFrame(animateShit);
       };
       animateShit();
