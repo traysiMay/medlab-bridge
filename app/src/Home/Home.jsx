@@ -74,13 +74,15 @@ const Home = ({ history, match }) => {
       const moon = document.getElementById("MOON");
       const moonLines = document.getElementById("moonLines");
 
-      let time = 0;
+      let time = 2800;
       let rate = 0.001;
       let shift1 = 0;
       let shift2 = 0;
       let shift3 = 0;
       let step = 1;
       let scale = 1;
+      let scalar = 0.003;
+
       const animateShit = () => {
         const wave1 = Math.sin(time * Math.PI * (rate + shift1));
         const wave2 = Math.sin(time * Math.PI * (rate + shift2));
@@ -136,8 +138,11 @@ const Home = ({ history, match }) => {
             loopTextEls(medlab, "fill", "white");
           }
           if (time > 2850) {
-            const scalar = 0.001;
             svg.setAttribute("transform", `scale(${(scale += -scalar)})`);
+            console.log(scale);
+            if (scale < -0.5) {
+              scalar += 0.3;
+            }
             if (scale < -6) {
               svg.remove();
               setShowFinish(true);
