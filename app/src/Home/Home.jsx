@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useReducer } from "react";
+import React, { useRef, useEffect, useReducer, useState } from "react";
 import {
   Button,
+  ButtonContainer,
+  Header,
   HomeContainer,
   MessageContainer,
   MessageWrapper
@@ -8,13 +10,8 @@ import {
 import reducer from "./reducer";
 import { VR } from "./VR2";
 
-const animateShit = () => {
-  console.log(Math.sin(Date.now()));
-  requestAnimationFrame(animateShit);
-};
-
 const Home = ({ history, match }) => {
-  console.log(match.params);
+  const [showFinish, setShowFinish] = useState(false);
   const stato = match.params.stato;
 
   const [state, dispatch] = useReducer(reducer, {
@@ -64,9 +61,7 @@ const Home = ({ history, match }) => {
       text[i].style[attribute] = newVal;
     }
   };
-  // TO DO STOP SET INTERVAL ON DISMOUNT
   useEffect(() => {
-    // blinky()
     if (stato === "1") setTimeout(blinky, 1000);
     if (stato === "2") {
       const svg = document.getElementById("svg");
@@ -142,15 +137,17 @@ const Home = ({ history, match }) => {
             loopTextEls(medlab, "fill", "white");
           }
           if (time > 2850) {
-            svg.setAttribute("transform", `scale(${(scale += -0.01)})`);
+            const scalar = 100;
+            svg.setAttribute("transform", `scale(${(scale += -scalar)})`);
             if (scale < -6) {
               svg.remove();
+              setShowFinish(true);
               return;
             }
           }
         }
 
-        time += 1;
+        time += 1000;
         requestAnimationFrame(animateShit);
       };
       animateShit();
@@ -162,8 +159,20 @@ const Home = ({ history, match }) => {
       {stato === "2" && (
         <MessageWrapper>
           <VR />
-          <Button>REGISTER</Button>
-          <Button>RSVP</Button>
+          {showFinish && (
+            <ButtonContainer>
+              <Header>CHOOSE YOUR PATH</Header>
+              <Button>JOIN THE LAB</Button>
+              <Button>RSVP</Button>
+              <Button
+                onClick={() =>
+                  (window.location = "https://en.wikipedia.org/wiki/Bread")
+                }
+              >
+                LEARN ABOUT BREAD
+              </Button>
+            </ButtonContainer>
+          )}
         </MessageWrapper>
       )}
       {stato === "1" && (

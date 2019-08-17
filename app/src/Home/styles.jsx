@@ -8,6 +8,19 @@ const MessageContainer = styled.div`
 
 const MessageWrapper = styled.div``;
 
+const Header = styled.div`
+  text-align: center;
+  font-size: 7rem;
+  padding: 6rem;
+  font-weight: bold;
+`;
+
+const ButtonContainer = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-row-gap: 7rem;
+`;
+
 const Button = styled.div`
   font-size: 3rem;
   font-family: monospace;
@@ -22,10 +35,18 @@ const Button = styled.div`
   margin: 6rem;
   width: 24rem;
   user-select: none;
+  margin: 0 auto;
   cursor: pointer;
   &:hover {
     background-color: red;
   }
 `;
 
-export { HomeContainer, MessageContainer, MessageWrapper, Button };
+export {
+  Header,
+  HomeContainer,
+  MessageContainer,
+  MessageWrapper,
+  ButtonContainer,
+  Button
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import { HashRouter, Router, Route } from "react-router-dom";
 
 import { history } from "@/_helpers";
 import { authenticationService, web3Service } from "@/_services";
@@ -35,7 +35,7 @@ class App extends React.Component {
   render() {
     const { currentUser } = this.state;
     return (
-      <Router history={history}>
+      <HashRouter basename="/" history={history}>
         <div>
           {currentUser && <Nav logout={this.logout} />}
           <div>
@@ -45,7 +45,7 @@ class App extends React.Component {
             <Route path="/register" component={Register} />
           </div>
         </div>
-      </Router>
+      </HashRouter>
     );
   }
 }
