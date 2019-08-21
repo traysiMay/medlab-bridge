@@ -44,7 +44,7 @@ class App extends React.Component {
             <Route path={["/home/:stato", "/home"]} component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/rsvp" component={RSVP} />
+            <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />
           </div>
         </div>
       </HashRouter>

@@ -11,7 +11,6 @@ import reducer from "./reducer";
 import { VR } from "./VR2";
 
 const Home = ({ history, match }) => {
-  const [showFinish, setShowFinish] = useState(false);
   const stato = match.params.stato;
 
   const [state, dispatch] = useReducer(reducer, {
@@ -74,7 +73,8 @@ const Home = ({ history, match }) => {
       const moon = document.getElementById("MOON");
       const moonLines = document.getElementById("moonLines");
 
-      let time = 2800;
+      let time = 0;
+      time = 2800;
       let rate = 0.001;
       let shift1 = 0;
       let shift2 = 0;
@@ -82,6 +82,7 @@ const Home = ({ history, match }) => {
       let step = 1;
       let scale = 1;
       let scalar = 0.003;
+      scalar = 5;
 
       const animateShit = () => {
         const wave1 = Math.sin(time * Math.PI * (rate + shift1));
@@ -139,13 +140,12 @@ const Home = ({ history, match }) => {
           }
           if (time > 2850) {
             svg.setAttribute("transform", `scale(${(scale += -scalar)})`);
-            console.log(scale);
             if (scale < -0.5) {
               scalar += 0.3;
             }
             if (scale < -6) {
               svg.remove();
-              setShowFinish(true);
+              history.push("/home/3");
               return;
             }
           }
@@ -160,26 +160,26 @@ const Home = ({ history, match }) => {
 
   return (
     <HomeContainer>
+      {stato === "3" && (
+        <ButtonContainer>
+          <Header>CHOOSE YOUR PATH</Header>
+          <Button onClick={() => history.push("/register")}>
+            JOIN THE LAB
+          </Button>
+          <Button onClick={() => history.push("/rsvp")}>RSVP</Button>
+          <Button
+            onClick={() =>
+              (window.location = "https://en.wikipedia.org/wiki/Bread")
+            }
+            style={{ width: "52.4%" }}
+          >
+            LEARN ABOUT BREAD
+          </Button>
+        </ButtonContainer>
+      )}
       {stato === "2" && (
         <MessageWrapper>
           <VR />
-          {showFinish && (
-            <ButtonContainer>
-              <Header>CHOOSE YOUR PATH</Header>
-              <Button onClick={() => history.push("/register")}>
-                JOIN THE LAB
-              </Button>
-              <Button onClick={() => history.push("/rsvp")}>RSVP</Button>
-              <Button
-                onClick={() =>
-                  (window.location = "https://en.wikipedia.org/wiki/Bread")
-                }
-                style={{ width: "72.4%" }}
-              >
-                LEARN ABOUT BREAD
-              </Button>
-            </ButtonContainer>
-          )}
         </MessageWrapper>
       )}
       {stato === "1" && (

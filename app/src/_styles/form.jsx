@@ -1,11 +1,11 @@
-import styled from 'styled-components'
-import { Field, Form, ErrorMessage } from 'formik'
+import styled from "styled-components";
+import { Field, Form, ErrorMessage } from "formik";
 
 export const CContainer = styled.div`
   display: grid;
   /* grid-template: 1fr 1fr 1fr; */
   justify-content: center;
-`
+`;
 
 export const Header = styled.div`
   grid-column: 1 / 4;
@@ -15,11 +15,11 @@ export const Header = styled.div`
   line-height: 0rem;
   margin-bottom: 2rem;
   width: 100%;
-`
+`;
 
 export const Body = styled.div`
   grid-column: 1/4;
-`
+`;
 
 export const Label = styled.label`
   text-align: center;
@@ -27,7 +27,7 @@ export const Label = styled.label`
   letter-spacing: 0.7rem;
   font-weight: bolder;
   margin-bottom: 0.9rem;
-`
+`;
 
 export const StyledField = styled(Field)`
   width: 80%;
@@ -39,14 +39,14 @@ export const StyledField = styled(Field)`
   padding: 2rem;
   margin-bottom: 3rem;
   outline: none;
-`
+`;
 
 export const StyledForm = styled(Form)`
   grid-column: 1/4;
   .form-group {
     display: grid;
   }
-`
+`;
 
 export const Button = styled.button`
   background: orangered;
@@ -56,11 +56,11 @@ export const Button = styled.button`
   border-radius: 10px 81px;
   border-width: 4rem;
   border-color: navajowhite;
-  font-size: 5rem;
+  font-size: 4rem;
   color: white;
   margin-top: 3rem;
   cursor: pointer;
-`
+`;
 
 export const StyledErrorMessage = styled(ErrorMessage)`
   margin: 0 auto;
@@ -68,4 +68,16 @@ export const StyledErrorMessage = styled(ErrorMessage)`
   font-size: 3rem;
   margin-top: -2.6rem;
   margin-bottom: 1.2rem;
-`
+`;
+
+export const DownloadWrapper = styled.div`
+  text-align: center;
+  border: 7px solid white;
+  height: 9rem;
+  line-height: 8.6rem;
+`;
+export const Download = styled.a`
+  color: white;
+  font-size: 4rem;
+  text-decoration: none;
+`;

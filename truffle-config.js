@@ -1,23 +1,19 @@
 const HTTPProviderRateLimitRetry = require("./lib/http-provider-rate-limit-retry");
 const fs = require("fs");
-const kaleidoCred = fs
-  .readFileSync(".secret")
-  .toString()
-  .trim();
 require("dotenv").config();
 const HDWalletProvider = require("truffle-hdwallet-provider");
-const prkey = [process.env.GEORDI_KEY];
+const pp = [process.env.PICARDP];
 module.exports = {
   contracts_build_directory: "./app/src/contracts",
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   networks: {
-    gKale: {
+    pKale: {
       provider: () => {
         const connectionURL = "u1wxxj5g51-u1ghyojs49-rpc.us1-azure.kaleido.io"; // without protocol (https://)
         return new HDWalletProvider(
-          prkey,
-          `https://${kaleidoCred}@${connectionURL}`
+          pp,
+          `https://${process.env.PICARD}@${connectionURL}`
         );
       },
       network_id: "*", // Match any network id
@@ -25,11 +21,11 @@ module.exports = {
       gas: 4500000
       /* type: 'quorum' // Use this property for Quorum environments */
     },
-    pKale: {
+    gKale: {
       provider: () => {
         const connectionURL = "u1wxxj5g51-u1ghyojs49-rpc.us1-azure.kaleido.io"; // without protocol (https://)
         return new HTTPProviderRateLimitRetry(
-          `https://${kaleidoCred}@${connectionURL}`,
+          `https://${process.env.GEORDI}@${connectionURL}`,
           100000
         );
       },

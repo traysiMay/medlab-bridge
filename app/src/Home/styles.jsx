@@ -30,7 +30,7 @@ const Button = styled.div`
   background: white;
   color: black;
   border-radius: 15%;
-  line-height: 11rem;
+  line-height: 12rem;
   text-align: center;
   margin: 6rem;
   width: 24rem;
