@@ -65,7 +65,7 @@ const Profile = () => {
   console.log(toads);
   return (
     <ProfileContainer>
-      <Header>Hi {currentUser.raptorname}!</Header>
+      <Header>hi {currentUser.raptorname}!</Header>
       {!QR && (
         <EmptyToadContainer>
           <Liner>

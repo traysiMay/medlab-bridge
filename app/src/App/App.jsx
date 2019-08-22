@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <HashRouter basename="/" history={history}>
         <div>
-          {currentUser && <Nav logout={this.logout} />}
+          <Nav currentUser={this.state.currentUser} logout={this.logout} />
           <div>
             <PrivateRoute exact path="/" component={Profile} />
             <Route path={["/home/:stato", "/home"]} component={Home} />

@@ -14,6 +14,10 @@ export const ProfileContainer = styled.div`
 export const Header = styled.h1`
   font-size: 4rem;
   grid-column: 2;
+  background: #110d0d;
+  text-align: center;
+  padding: 2rem;
+  border: 2px white solid;
 `;
 
 export const Liner = styled.div`

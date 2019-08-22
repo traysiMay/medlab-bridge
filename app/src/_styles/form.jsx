@@ -5,13 +5,15 @@ export const CContainer = styled.div`
   display: grid;
   /* grid-template: 1fr 1fr 1fr; */
   justify-content: center;
+  padding: 4rem;
+  padding-top: 0rem;
 `;
 
 export const Header = styled.div`
   grid-column: 1 / 4;
   text-align: center;
-  font-size: 8rem;
-  height: 19rem;
+  font-size: 5rem;
+  height: 12rem;
   line-height: 0rem;
   margin-bottom: 2rem;
   width: 100%;
@@ -22,9 +24,7 @@ export const Body = styled.div`
 `;
 
 export const Label = styled.label`
-  text-align: center;
-  font-size: 4rem;
-  letter-spacing: 0.7rem;
+  font-size: 3rem;
   font-weight: bolder;
   margin-bottom: 0.9rem;
 `;
@@ -32,13 +32,15 @@ export const Label = styled.label`
 export const StyledField = styled(Field)`
   width: 80%;
   margin: 0 auto;
-  font-size: 4.9rem;
+  font-size: 3.9rem;
   text-align: center;
-  border-radius: 0rem 11rem;
-  height: 6rem;
+  height: 3rem;
   padding: 2rem;
   margin-bottom: 3rem;
   outline: none;
+  border: 6px white solid;
+  background: black;
+  color: white;
 `;
 
 export const StyledForm = styled(Form)`
@@ -49,13 +51,13 @@ export const StyledForm = styled(Form)`
 `;
 
 export const Button = styled.button`
-  background: orangered;
+  background: black;
   width: 24rem;
   margin: 0 auto;
   height: 16rem;
   border-radius: 10px 81px;
   border-width: 4rem;
-  border-color: navajowhite;
+  border-color: white;
   font-size: 4rem;
   color: white;
   margin-top: 3rem;
