@@ -1,49 +1,49 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-const Dotenv = require('dotenv-webpack')
-const Uglify = require('uglifyjs-webpack-plugin')
-var JavaScriptObfuscator = require('webpack-obfuscator')
-const TerserPlugin = require('terser-webpack-plugin')
-const webpack = require('webpack')
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
+const Uglify = require("uglifyjs-webpack-plugin");
+var JavaScriptObfuscator = require("webpack-obfuscator");
+const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 module.exports = {
-  mode: 'development',
+  mode: "development",
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
-      },
-    ],
+        loader: "babel-loader"
+      }
+    ]
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".js", ".jsx"],
     alias: {
-      '@': path.resolve(__dirname, 'src/'),
-    },
+      "@": path.resolve(__dirname, "src/")
+    }
   },
   // optimization: {
   //   minimizer: [new TerserPlugin()]
   // },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html"
     }),
     new Dotenv(),
-    new webpack.ContextReplacementPlugin(/.*/),
+    new webpack.ContextReplacementPlugin(/.*/)
     // new JavaScriptObfuscator({
     //   rotateUnicodeArray: true
     // })
   ],
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   externals: {
     // global app config object
     config: JSON.stringify({
-      apiUrl: 'http://localhost:4000',
-    }),
-  },
-}
+      apiUrl: "http://localhost:4000"
+    })
+  }
+};

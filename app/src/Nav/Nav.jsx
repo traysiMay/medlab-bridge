@@ -10,7 +10,7 @@ const NavContainer = styled.div`
   grid-auto-flow: column;
   justify-content: center;
   padding: 1rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 2.1rem;
   grid-column-gap: 2rem;
 `;
 const LinkWrapper = styled.div`
@@ -18,8 +18,8 @@ const LinkWrapper = styled.div`
   width: 8rem;
   text-align: center;
   border: 2px white solid;
-      text-shadow: 9px 10px 10px red;
-    box-shadow: 10px 8px 20px red;
+      text-shadow: 9px 10px 10px white;
+    box-shadow: 10px 8px 20px white;
 }
 
 

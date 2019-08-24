@@ -21,7 +21,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         M
       </text>
@@ -30,7 +30,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         E
       </text>
@@ -39,7 +39,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         D
       </text>
@@ -48,7 +48,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         L
       </text>
@@ -57,7 +57,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         A
       </text>
@@ -66,7 +66,7 @@ export const MEDLAB = () => (
         fill="#FFFFFF"
         fontFamily="Arial"
         fontWeight="bold"
-        font-size="37.8543px"
+        fontSize="37.8543px"
       >
         B
       </text>

@@ -18,6 +18,8 @@ export const Header = styled.h1`
   text-align: center;
   padding: 2rem;
   border: 2px white solid;
+  text-shadow: 9px 10px 10px red;
+  box-shadow: 10px 8px 20px red;
 `;
 
 export const Liner = styled.div`
