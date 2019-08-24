@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-
+import { MEDLAB } from "./MEDLAB";
 import { Logo } from "./Logo";
 import { Squiggler } from "../_styles/Squiggler";
 
@@ -10,11 +10,20 @@ const NavContainer = styled.div`
   grid-auto-flow: column;
   justify-content: center;
   padding: 1rem;
+  margin-bottom: 0.8rem;
+  grid-column-gap: 2rem;
 `;
 const LinkWrapper = styled.div`
   padding: 1rem;
-  width: 14rem;
+  width: 8rem;
   text-align: center;
+  border: 2px white solid;
+      text-shadow: 9px 10px 10px red;
+    box-shadow: 10px 8px 20px red;
+}
+
+
+
 `;
 const aMix = css`
   font-size: 2rem;
@@ -34,23 +43,25 @@ const Nav = ({ currentUser, logout }) => {
   return (
     <Fragment>
       <div>
-        <Logo />
+        <MEDLAB />
+
+        {/* <Logo /> */}
       </div>
       <NavContainer>
         <LinkWrapper>
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/">home</StyledLink>
         </LinkWrapper>
         <LinkWrapper>
-          {currentUser && <StyledLink to="/crab">Crab</StyledLink>}
-          {!currentUser && <StyledLink to="/login">Login</StyledLink>}
+          {currentUser && <StyledLink to="/crab">crab</StyledLink>}
+          {!currentUser && <StyledLink to="/login">login</StyledLink>}
         </LinkWrapper>
         <LinkWrapper>
-          {currentUser && <StyledLink to="/register">Teemo</StyledLink>}
-          {!currentUser && <StyledLink to="/register">Register</StyledLink>}
+          {currentUser && <StyledLink to="/register">teemo</StyledLink>}
+          {!currentUser && <StyledLink to="/register">register</StyledLink>}
         </LinkWrapper>
         <LinkWrapper>
-          {currentUser && <A onClick={logout}>Logout</A>}
-          {!currentUser && <A onClick={logout}>Papo</A>}
+          {currentUser && <A onClick={logout}>logout</A>}
+          {!currentUser && <A onClick={logout}>papo</A>}
         </LinkWrapper>
       </NavContainer>
       <Squiggler />

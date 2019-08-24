@@ -8,7 +8,7 @@ import { PrivateRoute } from "@/_components";
 
 import { Home } from "@/Home";
 import { Nav } from "@/Nav";
-import { Profile } from "@/Profile";
+import { Initiation } from "@/Initiation";
 import { Login } from "@/Login";
 import { Register } from "@/Register";
 import { RSVP } from "@/RSVP";
@@ -40,7 +40,7 @@ class App extends React.Component {
         <div>
           <Nav currentUser={this.state.currentUser} logout={this.logout} />
           <div>
-            <PrivateRoute exact path="/" component={Profile} />
+            <PrivateRoute exact path="/" component={Initiation} />
             <Route path={["/home/:stato", "/home"]} component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

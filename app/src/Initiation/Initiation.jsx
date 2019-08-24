@@ -17,7 +17,7 @@ const EmptyToadContainer = styled.div`
   grid-row-gap: 6rem;
 `;
 
-const Profile = () => {
+const Initiation = () => {
   const [currentUser, setCurrentUser] = useState(
     authenticationService.currentUserValue
   );
@@ -105,4 +105,4 @@ const Profile = () => {
   );
 };
 
-export { Profile };
+export { Initiation };
