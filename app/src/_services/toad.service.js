@@ -9,7 +9,7 @@ export const toadService = {
 
 function getYours() {
   const requestOptions = { method: "GET", headers: authHeader() };
-  return fetch(`${config.apiUrl}/toad/yours`, requestOptions).then(
+  return fetch(`${process.env.MEDENG_URL}/toad/yours`, requestOptions).then(
     handleResponse
   );
 }

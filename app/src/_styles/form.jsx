@@ -52,7 +52,7 @@ export const StyledForm = styled(Form)`
 
 export const Button = styled.button`
   background: black;
-  width: 24rem;
+  width: 27rem;
   margin: 0 auto;
   height: 16rem;
   border-radius: 10px 81px;

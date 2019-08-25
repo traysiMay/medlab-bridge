@@ -8,7 +8,7 @@ export const ProfileContainer = styled.div`
   display: grid;
   justify-content: center;
   grid-row-gap: 7rem;
-  grid-template-columns: 15% 70% 15%;
+  grid-template-columns: 0% 80% 0%;
 `;
 
 export const Header = styled.h1`
@@ -20,6 +20,7 @@ export const Header = styled.h1`
   border: 2px white solid;
   text-shadow: 9px 10px 10px red;
   box-shadow: 10px 8px 20px red;
+  margin-bottom: -3rem;
 `;
 
 export const Liner = styled.div`

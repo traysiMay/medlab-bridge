@@ -18,13 +18,10 @@ const LinkWrapper = styled.div`
   width: 8rem;
   text-align: center;
   border: 2px white solid;
-      text-shadow: 9px 10px 10px white;
-    box-shadow: 10px 8px 20px white;
-}
-
-
-
+  text-shadow: 9px 10px 10px white;
+  box-shadow: 10px 8px 20px white;
 `;
+
 const aMix = css`
   font-size: 2rem;
   color: white;
@@ -39,29 +36,21 @@ const StyledLink = styled(Link)`
 `;
 
 const Nav = ({ currentUser, logout }) => {
+  console.log("wtf");
   console.log(currentUser);
   return (
     <Fragment>
       <div>
         <MEDLAB />
-
-        {/* <Logo /> */}
       </div>
       <NavContainer>
         <LinkWrapper>
-          <StyledLink to="/">home</StyledLink>
-        </LinkWrapper>
-        <LinkWrapper>
-          {currentUser && <StyledLink to="/crab">crab</StyledLink>}
+          {currentUser && <StyledLink to="/">home</StyledLink>}
           {!currentUser && <StyledLink to="/login">login</StyledLink>}
         </LinkWrapper>
         <LinkWrapper>
-          {currentUser && <StyledLink to="/register">teemo</StyledLink>}
-          {!currentUser && <StyledLink to="/register">register</StyledLink>}
-        </LinkWrapper>
-        <LinkWrapper>
           {currentUser && <A onClick={logout}>logout</A>}
-          {!currentUser && <A onClick={logout}>papo</A>}
+          {!currentUser && <StyledLink to="/register">register</StyledLink>}
         </LinkWrapper>
       </NavContainer>
       <Squiggler />

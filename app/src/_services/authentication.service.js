@@ -7,13 +7,22 @@ const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
 );
 
+const currentWorchSubject = new BehaviorSubject(
+  JSON.parse(localStorage.getItem("worch"))
+);
+
 export const authenticationService = {
+  isWorched,
   login,
   logout,
   register,
   currentUser: currentUserSubject.asObservable(),
+  worched: currentWorchSubject.asObservable(),
   get currentUserValue() {
     return currentUserSubject.value;
+  },
+  get currentWorchValue() {
+    return currentWorchSubject.value;
   }
 };
 
@@ -24,7 +33,7 @@ function login(username, password) {
     body: JSON.stringify({ username, password })
   };
 
-  return fetch(`${config.apiUrl}/auth/login`, requestOptions)
+  return fetch(`${process.env.MEDENG_URL}/auth/login`, requestOptions)
     .then(handleResponse)
     .then(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -47,7 +56,7 @@ function register(username, email, password) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, email, password })
   };
-  return fetch(`${config.apiUrl}/auth/register`, requestOptions)
+  return fetch(`${process.env.MEDENG_URL}/auth/register`, requestOptions)
     .then(handleResponse)
     .then(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -56,4 +65,9 @@ function register(username, email, password) {
 
       return user;
     });
+}
+
+function isWorched() {
+  localStorage.setItem("worch", true);
+  currentWorchSubject.next(true);
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { HashRouter, Router, Route } from "react-router-dom";
 
 import { history } from "@/_helpers";
@@ -18,7 +18,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+      worched: false
     };
   }
 
@@ -26,6 +27,7 @@ class App extends React.Component {
     authenticationService.currentUser.subscribe(x =>
       this.setState({ currentUser: x })
     );
+    authenticationService.worched.subscribe(x => this.setState({ worched: x }));
   }
 
   logout() {
@@ -34,11 +36,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, worched } = this.state;
+    const showNav = currentUser || worched ? true : false;
     return (
       <HashRouter basename="/" history={history}>
         <div>
-          <Nav currentUser={this.state.currentUser} logout={this.logout} />
+          {showNav && <Nav currentUser={currentUser} logout={this.logout} />}
           <div>
             <PrivateRoute exact path="/" component={Initiation} />
             <Route path={["/home/:stato", "/home"]} component={Home} />

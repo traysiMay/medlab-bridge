@@ -9,6 +9,7 @@ import {
 } from "./styles";
 import reducer from "./reducer";
 import { VR } from "./VR2";
+import { authenticationService } from "../_services/authentication.service";
 
 const Home = ({ history, match }) => {
   const stato = match.params.stato;
@@ -74,7 +75,7 @@ const Home = ({ history, match }) => {
       const moonLines = document.getElementById("moonLines");
 
       let time = 0;
-      time = 2800;
+      // time = 2800;
       let rate = 0.001;
       let shift1 = 0;
       let shift2 = 0;
@@ -82,7 +83,7 @@ const Home = ({ history, match }) => {
       let step = 1;
       let scale = 1;
       let scalar = 0.003;
-      scalar = 5;
+      // scalar = 5;
 
       const animateShit = () => {
         const wave1 = Math.sin(time * Math.PI * (rate + shift1));
@@ -163,7 +164,12 @@ const Home = ({ history, match }) => {
       {stato === "3" && (
         <ButtonContainer>
           <Header>CHOOSE YOUR PATH</Header>
-          <Button onClick={() => history.push("/register")}>
+          <Button
+            onClick={() => {
+              authenticationService.isWorched();
+              history.push("/register");
+            }}
+          >
             JOIN THE LAB
           </Button>
           <Button onClick={() => history.push("/rsvp")}>RSVP</Button>
