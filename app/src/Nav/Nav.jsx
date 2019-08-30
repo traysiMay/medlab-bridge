@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { MEDLAB } from "./MEDLAB";
-import { Logo } from "./Logo";
 import { Squiggler } from "../_styles/Squiggler";
 
 const NavContainer = styled.div`
@@ -36,13 +35,11 @@ const StyledLink = styled(Link)`
 `;
 
 const Nav = ({ currentUser, logout }) => {
-  console.log("wtf");
-  console.log(currentUser);
   return (
     <Fragment>
-      <div>
+      <Link to="/">
         <MEDLAB />
-      </div>
+      </Link>
       <NavContainer>
         <LinkWrapper>
           {currentUser && <StyledLink to="/">home</StyledLink>}

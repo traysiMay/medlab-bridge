@@ -1,6 +1,6 @@
 {
   "name": "react-jwt-authentication-example",
-  "homepage": "https://traysimay.github.io/medlab-bridge",
+  "homepage": "https://med--lab.org",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
@@ -10,15 +10,17 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "canvas": "^2.6.0",
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "formik": "^1.5.2",
     "history": "^4.9.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.0",
     "rxjs": "^6.3.3",
     "styled-components": "^4.3.2",
+    "three": "^0.107.0",
     "web3": "^1.2.1",
     "yup": "^0.27.0"
   },
@@ -28,6 +30,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "file-loader": "^4.2.0",
     "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "path": "^0.12.7",

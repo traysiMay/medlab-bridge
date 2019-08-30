@@ -10,7 +10,6 @@ import {
 import reducer from "./reducer";
 import { VR } from "./VR2";
 import { authenticationService } from "../_services/authentication.service";
-
 const Home = ({ history, match }) => {
   const stato = match.params.stato;
 

@@ -8,7 +8,9 @@ export const ProfileContainer = styled.div`
   display: grid;
   justify-content: center;
   grid-row-gap: 7rem;
-  grid-template-columns: 0% 80% 0%;
+  margin: 2rem;
+
+  /* grid-template-columns: 0% 90% 0%; */
 `;
 
 export const Header = styled.h1`

@@ -18,7 +18,7 @@ const Login = ({ history, location }) => {
   const handleFocus = event => event.target.select();
 
   if (authenticationService.currentUserValue) {
-    history.push("/");
+    history.push("/init");
   }
 
   return (
@@ -41,7 +41,7 @@ const Login = ({ history, location }) => {
             authenticationService.login(username, password).then(
               user => {
                 const { from } = location.state || {
-                  from: { pathname: "/" }
+                  from: { pathname: "/init" }
                 };
                 history.push(from);
               },

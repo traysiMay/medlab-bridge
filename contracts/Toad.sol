@@ -27,4 +27,8 @@ contract Toad is ERC721MetadataMintable, Ownable {
     boop[_id] = true;
   }
 
+  function unBoopIt(uint256 _id) public onlyMinter {
+    boop[_id] = false;
+  }
+
 }

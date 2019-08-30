@@ -19,7 +19,7 @@ const Register = ({ history, location }) => {
   const handleFocus = event => event.target.select();
 
   if (authenticationService.currentUserValue) {
-    history.push("/");
+    history.push("/init");
   }
 
   return (
@@ -47,10 +47,10 @@ const Register = ({ history, location }) => {
 
             authenticationService.register(username, email, password).then(
               user => {
-                // const { from } = location.state || {
-                //   from: { pathname: '/' },
-                // }
-                // history.push(from)
+                const { from } = location.state || {
+                  from: { pathname: "/init" }
+                };
+                history.push(from);
                 console.log(user);
               },
               error => {

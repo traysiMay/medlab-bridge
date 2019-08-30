@@ -5,6 +5,8 @@ const Uglify = require("uglifyjs-webpack-plugin");
 var JavaScriptObfuscator = require("webpack-obfuscator");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
 module.exports = {
   mode: "development",
   resolve: {
@@ -15,6 +17,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: "babel-loader"
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: "file-loader?name=[name].[ext]"
       }
     ]
   },
@@ -32,7 +38,8 @@ module.exports = {
       template: "./src/index.html"
     }),
     new Dotenv(),
-    new webpack.ContextReplacementPlugin(/.*/)
+    new webpack.ContextReplacementPlugin(/.*/),
+    new CleanWebpackPlugin()
     // new JavaScriptObfuscator({
     //   rotateUnicodeArray: true
     // })

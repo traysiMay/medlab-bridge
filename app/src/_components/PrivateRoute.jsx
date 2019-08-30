@@ -8,6 +8,11 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={props => {
       const currentUser = authenticationService.currentUserValue;
+      const worched = authenticationService.currentWorchValue;
+
+      if (!currentUser && !worched) {
+        return <Redirect to="/home/1" />;
+      }
       if (!currentUser) {
         // not logged in so redirect to login page with the return url
         return (
