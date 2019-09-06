@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --port 5000 --hot --host 0.0.0.0",
-    "build": "webpack",
+    "start": "NODE_ENV=development webpack-dev-server --port 5000 --hot --host 0.0.0.0",
+    "build": "webpack && cp dist/index.html dist/404.html",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const EmptyToadContainer = styled.div`
-  display: grid;
-  grid-column: 2;
-  grid-row-gap: 6rem;
+display: grid;
+    grid-column: 2;
+    grid-row-gap: 6rem;
+    padding: 4rem;
+    border: 2rem white solid;
 `;
 
 export const ToadContainer = styled.div`

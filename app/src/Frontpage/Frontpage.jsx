@@ -15,6 +15,7 @@ import {
 const Frontpage = () => {
   const MEDLABimg = useRef(null);
   const SMOKEimg = useRef(null);
+  let rendgar = null;
   useEffect(() => {
     const clock = new Clock();
     let delta;
@@ -93,7 +94,8 @@ const Frontpage = () => {
       mesh.rotation.y += 0.01;
       cubeSineDriver += 0.1;
       mesh.position.z = 100 + Math.sin(cubeSineDriver) * 500;
-      const tWave = (0.4 + Math.sin(Math.PI * 2 * counter * 0.1)) * 0.3;
+      const tWave = (0.8 + Math.sin(Math.PI * 2 * counter * 0.1)) * 0.6;
+      console.log(tWave)
       text.material.opacity = tWave;
       if (tWave > 0.35) {
         if (color.r === 1) {
@@ -108,12 +110,16 @@ const Frontpage = () => {
           text.material.color = color;
         }
       }
+      if (tWave > .7) {
+        smokeMaterial.color = color;
+
+      }
 
       renderer.render(scene, camera);
     };
     const animate = () => {
       delta = clock.getDelta();
-      requestAnimationFrame(animate);
+      rendgar = requestAnimationFrame(animate);
       evolveSmoke();
       render();
     };
@@ -127,7 +133,10 @@ const Frontpage = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    return () => document.querySelector("canvas").remove();
+    return () => {
+      window.cancelAnimationFrame(rendgar)
+      document.querySelector("canvas").remove();
+    }
   }, []);
   return (
     <div>

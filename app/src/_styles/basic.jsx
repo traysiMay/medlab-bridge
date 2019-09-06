@@ -26,8 +26,13 @@ export const Header = styled.h1`
 `;
 
 export const Liner = styled.div`
-  font-size: 2rem;
-  grid-column: 2;
+    font-size: 5rem;
+    grid-column: 2;
+    font-weight: 500;
+    &.last{
+      color:red;
+      border-bottom: 3rem white dashed;
+    }
 `;
 
 export const Paragraph = styled.div`
@@ -50,7 +55,7 @@ export const WhiteButton = styled.div`
   font-size: 4rem;
   width: 34rem;
   margin: auto;
-
+  cursor: pointer;
   &:hover {
     background: red;
   }

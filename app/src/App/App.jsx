@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { HashRouter, Router, Route, Switch } from "react-router-dom";
+import { HashRouter, BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { history } from "@/_helpers";
 import { authenticationService, web3Service } from "@/_services";
@@ -15,11 +15,11 @@ import { Nav } from "@/Nav";
 import { Register } from "@/Register";
 import { RSVP } from "@/RSVP";
 
-const ZApp = ({ showNav, currentUser, history, logout }) => {
+const ZApp = ({ showNav, currentUser, logout, url }) => {
   return (
     <div>
       {showNav && (
-        <Nav currentUser={currentUser} history={history} logout={logout} />
+        <Nav currentUser={currentUser} logout={logout} />
       )}
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />
@@ -58,12 +58,14 @@ class App extends React.Component {
     const { currentUser, worched } = this.state;
     const showNav = currentUser || worched ? true : false;
     const p = history.location.pathname;
+    const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ''
+    console.log(process.env.PUBLIC_URL)
     return (
-      <HashRouter basename="/" history={history}>
+      // <HashRouter basename="/" history={history}>
+      <BrowserRouter basename={process.env.PUBLIC_URL} >
         <div>
-          {" "}
           <Switch>
-            <Route exact path="/" component={Frontpage} />
+            <Route exact path='/' component={Frontpage} />
             <Route
               component={() => (
                 <ZApp
@@ -71,6 +73,7 @@ class App extends React.Component {
                   history={history}
                   logout={this.logout}
                   showNav={showNav}
+                  url={url}
                 />
               )}
             />
@@ -90,7 +93,7 @@ class App extends React.Component {
             <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />
           </div> */}
         </div>
-      </HashRouter>
+      </ BrowserRouter>
     );
   }
 }

@@ -15,7 +15,7 @@ import {
   StyledField,
   StyledForm
 } from "../_styles/form";
-import { Liner, WhiteButton } from "../_styles/basic";
+import { WhiteButton } from "../_styles/basic";
 import styled from "styled-components";
 
 import { SankYou } from "./SankYou";

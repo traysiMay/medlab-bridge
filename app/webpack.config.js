@@ -7,6 +7,12 @@ const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const envPath = process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod'
+
+
+require('dotenv').config({ path: envPath })
+const MEDENG_URL = process.env.MEDENG_URL
+
 module.exports = {
   mode: "development",
   resolve: {
@@ -34,10 +40,12 @@ module.exports = {
   //   minimizer: [new TerserPlugin()]
   // },
   plugins: [
+
+    new Dotenv({ path: envPath }),
     new HtmlWebpackPlugin({
-      template: "./src/index.html"
+      template: "./src/index.html",
+      base: process.env.base
     }),
-    new Dotenv(),
     new webpack.ContextReplacementPlugin(/.*/),
     new CleanWebpackPlugin()
     // new JavaScriptObfuscator({
