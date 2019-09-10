@@ -79,7 +79,7 @@ const Frontpage = ({ history }) => {
     document.body.appendChild(renderer.domElement);
     setTimeout(
       () =>
-        (document.body.onclick = function() {
+        (renderer.domElement.onclick = function() {
           history.push("/ch1/1");
         }),
       5000
