@@ -3,6 +3,7 @@ const fs = require("fs");
 require("dotenv").config();
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const pp = [process.env.PICARDP];
+const connectionURL = process.env.KALE_URI;
 module.exports = {
   contracts_build_directory: "./app/src/contracts",
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -10,7 +11,6 @@ module.exports = {
   networks: {
     pKale: {
       provider: () => {
-        const connectionURL = "u1wxxj5g51-u1ghyojs49-rpc.us1-azure.kaleido.io"; // without protocol (https://)
         return new HDWalletProvider(
           pp,
           `https://${process.env.PICARD}@${connectionURL}`
@@ -23,7 +23,6 @@ module.exports = {
     },
     gKale: {
       provider: () => {
-        const connectionURL = "u1wxxj5g51-u1ghyojs49-rpc.us1-azure.kaleido.io"; // without protocol (https://)
         return new HTTPProviderRateLimitRetry(
           `https://${process.env.GEORDI}@${connectionURL}`,
           100000

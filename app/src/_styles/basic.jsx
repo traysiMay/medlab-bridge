@@ -4,6 +4,22 @@ export const Attento = styled.span`
   color: red;
 `;
 
+export const Container = styled.div`
+  display: grid;
+  grid-template-columns: 10% 1fr 10%;
+  grid-row-gap: 2rem;
+`;
+
+export const Heading = styled.div`
+  text-align: center;
+  font-size: 8rem;
+  grid-column: 2;
+  font-weight: 800;
+  border-bottom: 1rem white solid;
+  width: 53%;
+  margin: auto;
+`;
+
 export const ProfileContainer = styled.div`
   display: grid;
   justify-content: center;
@@ -26,18 +42,21 @@ export const Header = styled.h1`
 `;
 
 export const Liner = styled.div`
-    font-size: 5rem;
-    grid-column: 2;
-    font-weight: 500;
-    &.last{
-      color:red;
-      border-bottom: 3rem white dashed;
-    }
+  font-size: 5rem;
+  grid-column: 2;
+  font-weight: 500;
+  &.last {
+    color: red;
+    border-bottom: 3rem white dashed;
+  }
 `;
 
 export const Paragraph = styled.div`
-  font-size: 1.5rem;
+  font-size: 4rem;
+  font-weight: 600;
   grid-column: 2;
+  border-bottom: 2rem white dashed;
+  padding-bottom: 1rem;
 `;
 
 export const MRow = styled.div`

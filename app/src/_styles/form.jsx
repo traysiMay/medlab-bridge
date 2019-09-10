@@ -27,6 +27,7 @@ export const Label = styled.label`
   font-size: 3rem;
   font-weight: bolder;
   margin-bottom: 0.9rem;
+  margin-left: 3rem;
 `;
 
 export const StyledField = styled(Field)`
@@ -66,10 +67,11 @@ export const Button = styled.button`
 
 export const StyledErrorMessage = styled(ErrorMessage)`
   margin: 0 auto;
-  color: red;
+  color: rgb(232, 117, 117);
   font-size: 3rem;
   margin-top: -2.6rem;
   margin-bottom: 1.2rem;
+  text-align: center;
 `;
 
 export const DownloadWrapper = styled.div`
@@ -82,4 +84,12 @@ export const Download = styled.a`
   color: white;
   font-size: 4rem;
   text-decoration: none;
+`;
+
+export const RequestError = styled.div`
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgb(232, 117, 117);
+  margin: 0rem 4rem 0rem;
+  text-align: center;
 `;

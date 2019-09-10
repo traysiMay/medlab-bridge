@@ -5,18 +5,25 @@ const Uglify = require("uglifyjs-webpack-plugin");
 var JavaScriptObfuscator = require("webpack-obfuscator");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+const express = require("express");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const envPath = process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod'
+const envPath =
+  process.env.NODE_ENV === "development" ? ".env.dev" : ".env.prod";
 
-
-require('dotenv').config({ path: envPath })
-const MEDENG_URL = process.env.MEDENG_URL
+require("dotenv").config({ path: envPath });
 
 module.exports = {
-  mode: "development",
+  mode: process.env.NODE_ENV,
   resolve: {
     extensions: [".js", ".jsx"]
+  },
+  output: {
+    filename:
+      process.env.NODE_ENV === "development"
+        ? "[name].js"
+        : "[name].[contenthash].js",
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
@@ -40,7 +47,6 @@ module.exports = {
   //   minimizer: [new TerserPlugin()]
   // },
   plugins: [
-
     new Dotenv({ path: envPath }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",

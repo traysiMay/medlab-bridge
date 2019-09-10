@@ -10,7 +10,7 @@ import {
 import reducer from "./reducer";
 import { VR } from "./VR2";
 import { authenticationService } from "../_services/authentication.service";
-const Home = ({ history, match }) => {
+const ChapterOne = ({ history, match }) => {
   const stato = match.params.stato;
 
   const [state, dispatch] = useReducer(reducer, {
@@ -145,7 +145,7 @@ const Home = ({ history, match }) => {
             }
             if (scale < -6) {
               svg.remove();
-              history.push("/home/3");
+              history.push("/ch1/3");
               return;
             }
           }
@@ -190,7 +190,7 @@ const Home = ({ history, match }) => {
       {stato === "1" && (
         <MessageContainer>
           <MessageWrapper ref={messageEl}>{state.messageText}</MessageWrapper>
-          <Button onClick={() => history.push("/home/2")} ref={buttonEl}>
+          <Button onClick={() => history.push("/ch1/2")} ref={buttonEl}>
             {state.buttonText}
           </Button>
         </MessageContainer>
@@ -199,4 +199,4 @@ const Home = ({ history, match }) => {
   );
 };
 
-export { Home };
+export { ChapterOne };

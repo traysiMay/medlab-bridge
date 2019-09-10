@@ -13,16 +13,15 @@ function getYours() {
     handleResponse
   );
 }
-function createToad(cat) {
+function createToad(gen, cat) {
   const requestOptions = {
     method: "POST",
     headers: {
       Authorization: `Bearer ${authenticationService.currentUserValue.token}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ cat })
+    body: JSON.stringify({ gen, cat })
   };
-  console.log(authenticationService.currentUserValue.token);
   return fetch(`${process.env.MEDENG_URL}/toad/create-toad`, requestOptions)
     .then(handleResponse)
     .then(toad => toad);

@@ -27,6 +27,7 @@ export const authenticationService = {
 };
 
 function login(username, password) {
+  console.log(process.env.MEDENG_URL);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { rsvpService } from "@/_services";
@@ -19,6 +20,15 @@ import { WhiteButton } from "../_styles/basic";
 import styled from "styled-components";
 
 import { SankYou } from "./SankYou";
+import {
+  ToadContainer,
+  HeaderName,
+  HeaderIcon,
+  QRSpace,
+  Qr,
+  Admit,
+  BottomLine
+} from "../Initiation/styles";
 
 const event = "raptorhole";
 
@@ -36,7 +46,7 @@ const Line2 = styled.div`
   margin-bottom: 10rem;
 `;
 
-const RSVP = ({ history, location, match }) => {
+const RSVP = ({ history, match }) => {
   if (match.params.hollaback === "sankyou") {
     return <SankYou />;
   }
@@ -45,12 +55,18 @@ const RSVP = ({ history, location, match }) => {
   const emailRef = useRef();
   const [message, setMessage] = useState("");
   const [alreadySigned, setAlreadySigned] = useState(false);
+  const [alreadyAccount, setAlreadyAccount] = useState(false);
   const [resending, setResending] = useState(false);
   const handleFocus = event => event.target.select();
 
   const localQR = localStorage.getItem("qr");
   if (qr === "" && localStorage.getItem("qr")) {
     setQr(localQR);
+  }
+
+  const storedEmail = localStorage.getItem("email");
+  if (!emailRef.current) {
+    emailRef.current = storedEmail;
   }
 
   const resendQR = () => {
@@ -66,6 +82,15 @@ const RSVP = ({ history, location, match }) => {
         <h2>RSVP</h2>
       </Header>
       <Body>
+        {alreadyAccount && (
+          <div style={{ marginTop: "-4rem" }}>
+            <Line1>It seems you have already created an account..</Line1>
+            <Line2>you may login to your account to retrieve a ticky :D</Line2>
+            <Link to="/login">
+              <WhiteButton>go to LOGIN!</WhiteButton>
+            </Link>
+          </div>
+        )}
         {alreadySigned && (
           <div style={{ marginTop: "-4rem" }}>
             <Line1>It seems you have already signed up...</Line1>
@@ -77,7 +102,7 @@ const RSVP = ({ history, location, match }) => {
         )}
         {qr && (
           <div>
-            <div style={{ marginBottom: "6rem" }}>
+            {/* <div style={{ marginBottom: "6rem" }}>
               <img style={{ display: "block", margin: "auto" }} src={`${qr}`} />
             </div>
             <DownloadWrapper>
@@ -85,10 +110,24 @@ const RSVP = ({ history, location, match }) => {
                 DOWNLOAD
               </Download>
               {message}
-            </DownloadWrapper>
+            </DownloadWrapper> */}
+            <ToadContainer>
+              <HeaderName>{emailRef.current}</HeaderName>
+              <HeaderIcon>!</HeaderIcon>
+              <QRSpace>
+                <Qr src={qr} />
+                <Admit>
+                  ADMIT <p>2</p>
+                </Admit>
+              </QRSpace>
+              <div style={{ gridArea: "toadman", padding: "2rem" }}>
+                <BottomLine> VALENCIA ROOM </BottomLine>
+                <BottomLine>NOV 2</BottomLine>
+              </div>
+            </ToadContainer>
           </div>
         )}
-        {!qr && !alreadySigned && (
+        {!qr && (!alreadySigned && !alreadyAccount) && (
           <Formik
             initialValues={{
               username: "",
@@ -111,18 +150,22 @@ const RSVP = ({ history, location, match }) => {
                   // history.push(from)
                   console.log(user);
                   localStorage.setItem("qr", user.data);
+                  localStorage.setItem("email", email);
                   setQr(user.data);
                   setMessage(user.message);
                   setSubmitting(false);
                 },
                 error => {
-                  let errorMessage = "there was an error";
-                  if (error === "Conflict") {
-                    errorMessage = "you already have signed up";
+                  if (error === "already_rsvp") {
+                    // setStatus(errorMessage);
+                    console.log("hi");
+                    setAlreadySigned(true);
                   }
-                  setStatus(errorMessage);
-                  setAlreadySigned(true);
+                  if (error === "already_account") {
+                    setAlreadyAccount(true);
+                  }
                   setSubmitting(false);
+                  setStatus("there was an error");
                 }
               );
             }}

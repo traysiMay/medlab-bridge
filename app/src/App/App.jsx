@@ -1,32 +1,32 @@
-import React, { Fragment } from "react";
-import { HashRouter, BrowserRouter, Route, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { history } from "@/_helpers";
-import { authenticationService, web3Service } from "@/_services";
+import { authenticationService } from "@/_services";
 
 import { PrivateRoute } from "@/_components";
 
 import { Frontpage } from "@/Frontpage";
-import { Home } from "@/Home";
+import { ChapterOne } from "@/ChapterOne";
 import { Initiation } from "@/Initiation";
 import { Login } from "@/Login";
 
 import { Nav } from "@/Nav";
 import { Register } from "@/Register";
 import { RSVP } from "@/RSVP";
+import { Info } from "@/Info";
 
 const ZApp = ({ showNav, currentUser, logout, url }) => {
   return (
     <div>
-      {showNav && (
-        <Nav currentUser={currentUser} logout={logout} />
-      )}
+      {showNav && <Nav currentUser={currentUser} logout={logout} />}
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />
-        <Route path={["/home/:stato", "/home"]} component={Home} />
+        <Route path={["/ch1/:stato", "/ch1"]} component={ChapterOne} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />
+        <Route path="/info" component={Info} />
       </div>
     </div>
   );
@@ -58,14 +58,12 @@ class App extends React.Component {
     const { currentUser, worched } = this.state;
     const showNav = currentUser || worched ? true : false;
     const p = history.location.pathname;
-    const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ''
-    console.log(process.env.PUBLIC_URL)
+    const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "";
     return (
-      // <HashRouter basename="/" history={history}>
-      <BrowserRouter basename={process.env.PUBLIC_URL} >
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div>
           <Switch>
-            <Route exact path='/' component={Frontpage} />
+            <Route exact path="/" component={Frontpage} />
             <Route
               component={() => (
                 <ZApp
@@ -78,22 +76,8 @@ class App extends React.Component {
               )}
             />
           </Switch>
-          {/* {showNav && (
-            <Nav
-              currentUser={currentUser}
-              history={history}
-              logout={this.logout}
-            />
-          )}
-          <div>
-            <PrivateRoute exact path="/init" component={Initiation} />
-            <Route path={["/home/:stato", "/home"]} component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />
-          </div> */}
         </div>
-      </ BrowserRouter>
+      </BrowserRouter>
     );
   }
 }

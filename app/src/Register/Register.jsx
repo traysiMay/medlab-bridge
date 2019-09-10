@@ -9,6 +9,7 @@ import {
   CContainer,
   Header,
   Label,
+  RequestError,
   StyledErrorMessage,
   StyledField,
   StyledForm
@@ -25,7 +26,7 @@ const Register = ({ history, location }) => {
   return (
     <CContainer>
       <Header>
-        <h2>register</h2>
+        <h2>signup</h2>
       </Header>
       <Body>
         <Formik
@@ -35,8 +36,15 @@ const Register = ({ history, location }) => {
             password: ""
           }}
           validationSchema={Yup.object().shape({
-            username: Yup.string().required("Username is required"),
-            email: Yup.string().required("Email is required"),
+            username: Yup.string()
+              .matches(
+                /^\w+$/,
+                "only letters, numbers, and underscores my dude"
+              )
+              .required("Username is required"),
+            email: Yup.string()
+              .email()
+              .required("Email is required"),
             password: Yup.string().required("Password is required")
           })}
           onSubmit={(
@@ -51,11 +59,10 @@ const Register = ({ history, location }) => {
                   from: { pathname: "/init" }
                 };
                 history.push(from);
-                console.log(user);
               },
               error => {
                 setSubmitting(false);
-                setStatus(error);
+                setStatus({ msg: error });
               }
             );
           }}
@@ -114,6 +121,7 @@ const Register = ({ history, location }) => {
                   className="invalid-feedback"
                 />
               </div>
+              {status && <RequestError>{status.msg}</RequestError>}
               <div className="form-group">
                 <Button
                   type="submit"
@@ -126,7 +134,6 @@ const Register = ({ history, location }) => {
                   <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                 )}
               </div>
-              {status && <div className={"alert alert-danger"}>{status}</div>}
             </StyledForm>
           )}
         />

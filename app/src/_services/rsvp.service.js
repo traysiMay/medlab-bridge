@@ -12,7 +12,7 @@ function rsvp(email) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email })
   };
-  return fetch(`${config.apiUrl}/rsvp/create`, requestOptions)
+  return fetch(`${process.env.MEDENG_URL}/rsvp/create`, requestOptions)
     .then(handleResponse)
     .then(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes

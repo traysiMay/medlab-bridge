@@ -12,7 +12,7 @@ import {
   DirectionalLight,
   Clock
 } from "three";
-const Frontpage = () => {
+const Frontpage = ({ history }) => {
   const MEDLABimg = useRef(null);
   const SMOKEimg = useRef(null);
   let rendgar = null;
@@ -77,6 +77,13 @@ const Frontpage = () => {
       smokeParticles.push(particle);
     }
     document.body.appendChild(renderer.domElement);
+    setTimeout(
+      () =>
+        (document.body.onclick = function() {
+          history.push("/ch1/1");
+        }),
+      5000
+    );
 
     const evolveSmoke = () => {
       let sp = smokeParticles.length;
@@ -95,7 +102,6 @@ const Frontpage = () => {
       cubeSineDriver += 0.1;
       mesh.position.z = 100 + Math.sin(cubeSineDriver) * 500;
       const tWave = (0.8 + Math.sin(Math.PI * 2 * counter * 0.1)) * 0.6;
-      console.log(tWave)
       text.material.opacity = tWave;
       if (tWave > 0.35) {
         if (color.r === 1) {
@@ -110,14 +116,14 @@ const Frontpage = () => {
           text.material.color = color;
         }
       }
-      if (tWave > .7) {
+      if (tWave > 0.7) {
         smokeMaterial.color = color;
-
       }
 
       renderer.render(scene, camera);
     };
     const animate = () => {
+      console.log("chain");
       delta = clock.getDelta();
       rendgar = requestAnimationFrame(animate);
       evolveSmoke();
@@ -132,11 +138,11 @@ const Frontpage = () => {
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
-
+    setTimeout(() => history.push("/ch1/1"), 30000);
     return () => {
-      window.cancelAnimationFrame(rendgar)
+      window.cancelAnimationFrame(rendgar);
       document.querySelector("canvas").remove();
-    }
+    };
   }, []);
   return (
     <div>
