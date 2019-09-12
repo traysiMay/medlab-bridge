@@ -41,6 +41,8 @@ const Register = ({ history, location }) => {
                 /^\w+$/,
                 "only letters, numbers, and underscores my dude"
               )
+              .min(4, "Your raptor name must be at least 4 characters")
+              .max(20, "Your raptor name cannot be more than 20 characters")
               .required("Username is required"),
             email: Yup.string()
               .email()

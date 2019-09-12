@@ -50,6 +50,7 @@ module.exports = {
     new Dotenv({ path: envPath }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      chicken: "im a chicken",
       base: process.env.base
     }),
     new webpack.ContextReplacementPlugin(/.*/),

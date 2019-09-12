@@ -18,7 +18,6 @@ function rsvp(email) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       // localStorage.setItem('currentUser', JSON.stringify(user))
       // currentUserSubject.next(user)
-      console.log(user);
       return user;
       // return user
     });
@@ -30,9 +29,7 @@ function resendEmail(email, event) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, event })
   };
-  return fetch(`${process.env.MEDENG_URL}/rsvp/resend`, requestOptions)
-    .then(handleResponse)
-    .then(qr => {
-      console.log(qr);
-    });
+  return fetch(`${process.env.MEDENG_URL}/rsvp/resend`, requestOptions).then(
+    handleResponse
+  );
 }

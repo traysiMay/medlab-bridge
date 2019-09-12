@@ -11,7 +11,7 @@ export const Info = () => {
       <Paragraph>NOV 2</Paragraph>
       <Paragraph>RSVP BY EMAIL</Paragraph>
       <Paragraph>
-        <spam style={{ color: "red" }}>OR</spam>
+        <span style={{ color: "red" }}>OR</span>
       </Paragraph>
       <Paragraph
         style={{ borderBottom: "1rem red dashed", paddingBottom: "3rem" }}

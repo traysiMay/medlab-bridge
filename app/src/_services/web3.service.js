@@ -7,6 +7,7 @@ const currentToadsSubject = new BehaviorSubject([]);
 
 export const web3Service = {
   connect,
+  getURI,
   getToad,
   toads: currentToadsSubject.asObservable(),
   web3: currentWeb3Subject.asObservable(),
@@ -16,11 +17,10 @@ export const web3Service = {
 };
 
 function connect() {
-  const U = process.env.KALEIDO_USER;
-  const P = process.env.KALEIDO_PASS;
+  const A = process.env.KALE_A;
+  const B = process.env.KALE_B;
   const RPC = process.env.RPC;
-  const url = `https://${U}:${P}@${RPC}`;
-  console.log(url);
+  const url = `https://${A}:${B}@${RPC}`;
   const provider = new Web3.providers.HttpProvider(url);
   const web3 = new Web3(provider);
   currentWeb3Subject.next(web3);
@@ -35,4 +35,13 @@ function getToad(toadId) {
     .boop(toadId)
     .call()
     .then(boop => boop);
+}
+
+function getURI(toadId) {
+  const web3 = currentWeb3Subject._value;
+  const toad = new web3.eth.Contract(Toad.abi, process.env.TOAD_ADDRESS);
+  return toad.methods
+    .tokenURI(toadId)
+    .call()
+    .then(uri => uri);
 }

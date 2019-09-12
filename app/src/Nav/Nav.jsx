@@ -92,7 +92,7 @@ const NavC = ({ currentUser, history, logout }) => {
         >
           <NavContainer open={open} show={showNav}>
             <LinkWrapper>
-              {currentUser && <StyledLink to="/">home</StyledLink>}
+              {currentUser && <StyledLink to="/init">ticket</StyledLink>}
               {!currentUser && <StyledLink to="/login">signin</StyledLink>}
             </LinkWrapper>
             <LinkWrapper>
