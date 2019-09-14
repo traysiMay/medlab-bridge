@@ -12,10 +12,12 @@ import {
   DirectionalLight,
   Clock
 } from "three";
+
 const Frontpage = ({ history }) => {
   const MEDLABimg = useRef(null);
   const SMOKEimg = useRef(null);
   let rendgar = null;
+
   useEffect(() => {
     const clock = new Clock();
     let delta;
@@ -77,6 +79,13 @@ const Frontpage = ({ history }) => {
       smokeParticles.push(particle);
     }
     document.body.appendChild(renderer.domElement);
+    setTimeout(
+      () =>
+        (renderer.domElement.onclick = function() {
+          history.push("/ch1/1");
+        }),
+      5000
+    );
 
     const evolveSmoke = () => {
       let sp = smokeParticles.length;
@@ -131,7 +140,6 @@ const Frontpage = ({ history }) => {
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
-    setTimeout(() => history.push("/ch1/1"), 30000);
     return () => {
       window.cancelAnimationFrame(rendgar);
       document.querySelector("canvas").remove();

@@ -8,7 +8,7 @@ import {
   MessageWrapper
 } from "./styles";
 import reducer from "./reducer";
-import { VR } from "./VR2";
+import { VR } from "./VR";
 import { authenticationService } from "../_services/authentication.service";
 const ChapterOne = ({ history, match }) => {
   const stato = match.params.stato;
@@ -57,7 +57,16 @@ const ChapterOne = ({ history, match }) => {
   const loopTextEls = (g, attribute, newVal) => {
     const text = g.getElementsByTagName("text");
     for (let i = 0; i < text.length; i++) {
-      text[i].style[attribute] = newVal;
+      text[i].setAttribute(attribute, newVal);
+    }
+  };
+  const loopTextElsText = (g, attribute, newVal) => {
+    const text = g.getElementsByTagName("text");
+    for (let i = 0; i < text.length; i++) {
+      let r = Math.random()
+        .toString(36)
+        .substring(4, 5);
+      text[i].textContent = r;
     }
   };
   useEffect(() => {
@@ -67,14 +76,19 @@ const ChapterOne = ({ history, match }) => {
       const names = document.getElementById("names");
       const dials = document.getElementById("dials");
       const raptor = document.getElementById("raptor");
+      const stephen = document.getElementById("stephen");
       const valenciaRoom = document.getElementById("valenciaRoom");
       const medlab = document.getElementById("medlab");
       const bottomLines = document.getElementById("bottomLines");
       const moon = document.getElementById("MOON");
       const moonLines = document.getElementById("moonLines");
 
+      loopTextElsText(raptor, "text", "M");
+      loopTextElsText(dials, "text", "M");
+      loopTextElsText(stephen, "text", "M");
+
       let time = 0;
-      // time = 2800;
+      //  / time = 2600;
       let rate = 0.001;
       let shift1 = 0;
       let shift2 = 0;
@@ -89,13 +103,17 @@ const ChapterOne = ({ history, match }) => {
         const wave2 = Math.sin(time * Math.PI * (rate + shift2));
         const wave3 = Math.sin(time * Math.PI * (rate + shift3));
 
+        loopTextElsText(raptor, "text", "M");
+        loopTextElsText(dials, "text", "M");
+        loopTextElsText(stephen, "text", "M");
+
         if (step === 1) {
           moon.style.opacity = wave1;
           if (time > 420) {
             valenciaRoom.style.opacity = wave2;
           }
           if (time > 1000) {
-            rate += 0.0001;
+            rate += 0.001;
             names.style.opacity = wave3;
           }
           if (time > 1800) {
@@ -114,8 +132,16 @@ const ChapterOne = ({ history, match }) => {
             if (time > 2600) {
               medlab.setAttribute("opacity", 1);
               if (time % 4) loopTextEls(raptor, "fill", "white");
+
+              if (time % 4) loopTextElsText(raptor, "text", "M");
+
               if (time % 2) loopTextEls(dials, "fill", "white");
+
+              if (time % 2) loopTextElsText(dials, "fill", "white");
+
               if (time % 3) loopTextEls(stephen, "fill", "white");
+              if (time % 3) loopTextElsText(stephen, "fill", "white");
+
               if (time % 2) loopTextEls(raptor, "fill", "red");
               if (time % 3) loopTextEls(dials, "fill", "red");
               if (time % 4) loopTextEls(stephen, "fill", "red");
