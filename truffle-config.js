@@ -1,6 +1,9 @@
 const HTTPProviderRateLimitRetry = require("./lib/http-provider-rate-limit-retry");
 const fs = require("fs");
-require("dotenv").config();
+require("dotenv").config({
+  path: process.env.NODE_ENV === "development" ? ".env.dev" : ".env"
+});
+
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const pp = [process.env.PICARDP];
 const connectionURL = process.env.KALE_URI;

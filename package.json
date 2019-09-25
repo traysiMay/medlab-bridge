@@ -16,10 +16,13 @@
     "web3": "^1.0.0-beta.37"
   },
   "devDependencies": {
-    "@types/styled-components": "^4.1.18"
+    "@types/styled-components": "^4.1.18",
+    "cross-env": "^6.0.0"
   },
   "scripts": {
-    "test": "truffle test"
+    "test": "truffle test",
+    "migrate-dev": "cross-env NODE_ENV=development truffle migrate",
+    "console-dev": "cross-env NODE_ENV=development truffle console --network pKale"
   },
   "repository": {
     "type": "git",
