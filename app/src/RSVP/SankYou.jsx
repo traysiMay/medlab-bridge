@@ -9,7 +9,7 @@ const RHeader = styled.h1`
   font-size: 7rem;
   margin-left: 10rem;
 `;
-const Head = styled.div`
+export const Head = styled.div`
   font-size: 20rem;
   position: absolute;
   top: 65%;

@@ -7,6 +7,13 @@ export const CContainer = styled.div`
   justify-content: center;
   padding: 4rem;
   padding-top: 0rem;
+  background: white;
+  color: black;
+  padding: 6rem;
+  width: 70%;
+  margin: 0 auto 4rem auto;
+  border: 3px black solid;
+  box-shadow: 15px 17px white;
 `;
 
 export const Header = styled.div`
@@ -92,4 +99,11 @@ export const RequestError = styled.div`
   color: rgb(232, 117, 117);
   margin: 0rem 4rem 0rem;
   text-align: center;
+`;
+
+export const PosterContainer = styled.div`
+  border: 8px white solid;
+  margin: 60px auto 49px;
+  box-shadow: 10px 20px white;
+  width: 93%;
 `;

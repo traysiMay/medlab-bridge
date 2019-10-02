@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { rsvpService } from "@/_services";
-
+import { Syzygy } from "./Syzygy";
 import {
   Body,
   Button,
@@ -14,12 +14,13 @@ import {
   Label,
   StyledErrorMessage,
   StyledField,
-  StyledForm
+  StyledForm,
+  PosterContainer
 } from "../_styles/form";
 import { WhiteButton } from "../_styles/basic";
 import styled from "styled-components";
 
-import { SankYou } from "./SankYou";
+import { SankYou, Head } from "./SankYou";
 import {
   ToadContainer,
   HeaderName,
@@ -29,7 +30,6 @@ import {
   Admit,
   BottomLine
 } from "../Initiation/styles";
-
 const event = "raptorhole";
 
 const Line1 = styled.div`
@@ -46,6 +46,11 @@ const Line2 = styled.div`
   margin-bottom: 10rem;
 `;
 
+const AHead = styled(Head)`
+  font-size: 10rem;
+  top: 0;
+`;
+
 const RSVP = ({ history, match }) => {
   if (match.params.hollaback === "sankyou") {
     return <SankYou />;
@@ -58,6 +63,25 @@ const RSVP = ({ history, match }) => {
   const [alreadyAccount, setAlreadyAccount] = useState(false);
   const [resending, setResending] = useState(false);
   const handleFocus = event => event.target.select();
+
+  const head = useRef();
+
+  useEffect(() => {
+    let req;
+    let counter = 0;
+    const dumbLoop = () => {
+      const animate = () => {
+        req = window.requestAnimationFrame(animate);
+        head.current.style.transform = `rotate3d(1, 1, 1, ${counter}deg)`;
+        counter++;
+      };
+      animate();
+    };
+    dumbLoop();
+    return () => {
+      window.cancelAnimationFrame(req);
+    };
+  }, []);
 
   const localQR = localStorage.getItem("qr");
   if (qr === "" && localStorage.getItem("qr")) {
@@ -77,32 +101,42 @@ const RSVP = ({ history, match }) => {
   };
   console.log(resending);
   return (
-    <CContainer>
-      <Header>
-        <h2>RSVP</h2>
-      </Header>
-      <Body>
-        {alreadyAccount && (
-          <div style={{ marginTop: "-4rem" }}>
-            <Line1>It seems you have already created an account..</Line1>
-            <Line2>you may login to your account to retrieve a ticky :D</Line2>
-            <Link to="/login">
-              <WhiteButton>go to LOGIN!</WhiteButton>
-            </Link>
-          </div>
-        )}
-        {alreadySigned && (
-          <div style={{ marginTop: "-4rem" }}>
-            <Line1>It seems you have already signed up...</Line1>
-            <Line2>
-              Would you like to have your ticket emailed to you again?
-            </Line2>
-            <WhiteButton onClick={resendQR}>yAAA!</WhiteButton>
-          </div>
-        )}
-        {qr && (
-          <div>
-            {/* <div style={{ marginBottom: "6rem" }}>
+    <div>
+      <div style={{ height: "10rem" }}>
+        <AHead ref={head}>:)</AHead>
+      </div>
+      <PosterContainer>
+        <Syzygy />
+      </PosterContainer>
+      <CContainer style={qr ? { padding: "0", width: "100%" } : {}}>
+        <Header>
+          <h3>RSVP</h3>
+        </Header>
+
+        <Body>
+          {alreadyAccount && (
+            <div style={{ marginTop: "-4rem" }}>
+              <Line1>It seems you have already created an account..</Line1>
+              <Line2>
+                you may login to your account to retrieve a ticky :D
+              </Line2>
+              <Link to="/login">
+                <WhiteButton>go to LOGIN!</WhiteButton>
+              </Link>
+            </div>
+          )}
+          {alreadySigned && (
+            <div style={{ marginTop: "-4rem" }}>
+              <Line1>It seems you have already signed up...</Line1>
+              <Line2>
+                Would you like to have your ticket emailed to you again?
+              </Line2>
+              <WhiteButton onClick={resendQR}>yAAA!</WhiteButton>
+            </div>
+          )}
+          {qr && (
+            <div>
+              {/* <div style={{ marginBottom: "6rem" }}>
               <img style={{ display: "block", margin: "auto" }} src={`${qr}`} />
             </div>
             <DownloadWrapper>
@@ -111,99 +145,117 @@ const RSVP = ({ history, match }) => {
               </Download>
               {message}
             </DownloadWrapper> */}
-            <ToadContainer>
-              <HeaderName>{emailRef.current}</HeaderName>
-              <HeaderIcon>!</HeaderIcon>
-              <QRSpace>
-                <Qr src={qr} />
-                <Admit>
-                  ADMIT <p>2</p>
-                </Admit>
-              </QRSpace>
-              <div style={{ gridArea: "toadman", padding: "2rem" }}>
-                <BottomLine> VALENCIA ROOM </BottomLine>
-                <BottomLine>NOV 2</BottomLine>
-              </div>
-            </ToadContainer>
-          </div>
-        )}
-        {!qr && (!alreadySigned && !alreadyAccount) && (
-          <Formik
-            initialValues={{
-              username: "",
-              email: "",
-              password: ""
-            }}
-            validationSchema={Yup.object().shape({
-              email: Yup.string()
-                // .email()
-                .required("Email is required")
-            })}
-            onSubmit={({ email }, { setStatus, setSubmitting }) => {
-              setStatus();
-              emailRef.current = email;
-              rsvpService.rsvp(email, event).then(
-                user => {
-                  // const { from } = location.state || {
-                  //   from: { pathname: '/' },
-                  // }
-                  // history.push(from)
-                  console.log(user);
-                  localStorage.setItem("qr", user.data);
-                  localStorage.setItem("email", email);
-                  setQr(user.data);
-                  setMessage(user.message);
-                  setSubmitting(false);
-                },
-                error => {
-                  if (error === "already_rsvp") {
-                    // setStatus(errorMessage);
-                    console.log("hi");
-                    setAlreadySigned(true);
-                  }
-                  if (error === "already_account") {
-                    setAlreadyAccount(true);
-                  }
-                  setSubmitting(false);
-                  setStatus("there was an error");
-                }
-              );
-            }}
-            render={({ errors, status, touched, isSubmitting }) => (
-              <StyledForm>
-                <div className="form-group">
-                  <Label htmlFor="email">Email</Label>
-                  <StyledField
-                    name="email"
-                    type="text"
-                    placeholder="hehe"
-                    onFocus={handleFocus}
-                    className={
-                      "form-control" +
-                      (errors.email && touched.email ? " is-invalid" : "")
+              <ToadContainer>
+                <HeaderName>{emailRef.current}</HeaderName>
+                <HeaderIcon>!</HeaderIcon>
+                <QRSpace>
+                  <Qr src={qr} />
+                  <Admit>
+                    ADMIT <p>2</p>
+                  </Admit>
+                </QRSpace>
+                <div style={{ gridArea: "toadman", padding: "2rem" }}>
+                  <BottomLine> VALENCIA ROOM </BottomLine>
+                  <BottomLine>NOV 2</BottomLine>
+                </div>
+              </ToadContainer>
+            </div>
+          )}
+          {!qr && (!alreadySigned && !alreadyAccount) && (
+            <Formik
+              initialValues={{
+                username: "",
+                email: "",
+                password: ""
+              }}
+              validationSchema={Yup.object().shape({
+                email: Yup.string()
+                  // .email()
+                  .required("Email is required")
+              })}
+              onSubmit={({ email }, { setStatus, setSubmitting }) => {
+                setStatus();
+                emailRef.current = email;
+                rsvpService.rsvp(email, event).then(
+                  user => {
+                    // const { from } = location.state || {
+                    //   from: { pathname: '/' },
+                    // }
+                    // history.push(from)
+                    console.log(user);
+                    localStorage.setItem("qr", user.data);
+                    localStorage.setItem("email", email);
+                    setQr(user.data);
+                    setMessage(user.message);
+                    setSubmitting(false);
+                  },
+                  error => {
+                    if (error === "already_rsvp") {
+                      // setStatus(errorMessage);
+                      console.log("hi");
+                      setAlreadySigned(true);
                     }
-                  />
-                  <StyledErrorMessage
-                    name="email"
-                    component="div"
-                    className="invalid-feedback"
-                  />
-                </div>
-                <div className="form-group">
-                  <Button type="submit" disabled={isSubmitting}>
-                    Send It
-                  </Button>
-                  {isSubmitting && (
-                    <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    if (error === "already_account") {
+                      setAlreadyAccount(true);
+                    }
+                    setSubmitting(false);
+                    setStatus("there was an error");
+                  }
+                );
+              }}
+              render={({ errors, status, touched, isSubmitting }) => (
+                <StyledForm>
+                  <div className="form-group">
+                    <Label htmlFor="email">Email</Label>
+                    <StyledField
+                      name="email"
+                      type="text"
+                      placeholder="hehe"
+                      onFocus={handleFocus}
+                      className={
+                        "form-control" +
+                        (errors.email && touched.email ? " is-invalid" : "")
+                      }
+                    />
+                    <StyledErrorMessage
+                      name="email"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <Button type="submit" disabled={isSubmitting}>
+                      Send It
+                    </Button>
+                    {isSubmitting && (
+                      <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    )}
+                  </div>
+                  {status && (
+                    <div className={"alert alert-danger"}>{status}</div>
                   )}
-                </div>
-                {status && <div className={"alert alert-danger"}>{status}</div>}
-              </StyledForm>
-            )}
-          />
-        )}
-      </Body>
-    </CContainer>
+                </StyledForm>
+              )}
+            />
+          )}
+        </Body>
+      </CContainer>
+      <CContainer>
+        <Header>
+          <h3>INFO</h3>
+        </Header>
+        <Body>
+          <Line2>Masks encouraged</Line2>
+          <Line2>Free entry with RSVP</Line2>
+          <Line2>or free entry with mask</Line2>
+          <Line2>There will be music</Line2>
+          <Line2>There will be good people</Line2>
+          <Line2>There will be dinosaurs</Line2>
+          <Line2>Bring your weird self</Line2>
+          :)
+        </Body>
+      </CContainer>
+    </div>
   );
 };
 
