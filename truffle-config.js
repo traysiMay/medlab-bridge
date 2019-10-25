@@ -3,10 +3,10 @@ const fs = require("fs");
 require("dotenv").config({
   path: process.env.NODE_ENV === "development" ? ".env.dev" : ".env"
 });
-
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const pp = [process.env.PICARDP];
 const connectionURL = process.env.KALE_URI;
+console.log(connectionURL);
 module.exports = {
   contracts_build_directory: "./app/src/contracts",
   // See <http://truffleframework.com/docs/advanced/configuration>
