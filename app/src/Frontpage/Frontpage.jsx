@@ -79,13 +79,9 @@ const Frontpage = ({ history }) => {
       smokeParticles.push(particle);
     }
     document.body.appendChild(renderer.domElement);
-    setTimeout(
-      () =>
-        (renderer.domElement.onclick = function() {
-          history.push("/ch1/1");
-        }),
-      5000
-    );
+    renderer.domElement.onclick = function() {
+      history.push("/home");
+    };
 
     const evolveSmoke = () => {
       let sp = smokeParticles.length;

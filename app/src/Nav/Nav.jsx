@@ -8,7 +8,8 @@ import {
   LowerNav,
   NavContainer,
   Smiler,
-  StyledLink
+  StyledLink,
+  LogoWrapper
 } from "./styles";
 
 const animator = (color, end, obj, transformation) => {
@@ -29,7 +30,17 @@ const animator = (color, end, obj, transformation) => {
 const NavC = ({ currentUser, history, logout }) => {
   const [open, setOpen] = useState(false);
   const [showNav, setShowNav] = useState(false);
-
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      console.log("resize open");
+      setOpen(true);
+      setShowNav(true);
+    } else {
+      console.log("resize close");
+      setOpen(false);
+      setShowNav(true);
+    }
+  });
   const goHome = () => {
     history.push("/");
   };
@@ -71,19 +82,20 @@ const NavC = ({ currentUser, history, logout }) => {
 
   return (
     <Fragment>
-      <MEDLAB
-        goHome={goHome}
-        onCircle={onCircle}
-        onHex={onHex}
-        onSquare={onSquare}
-        onTriangle={onTriangle}
-      />
-
+      <LogoWrapper>
+        <MEDLAB
+          goHome={goHome}
+          onCircle={onCircle}
+          onHex={onHex}
+          onSquare={onSquare}
+          onTriangle={onTriangle}
+        />
+      </LogoWrapper>
       <LowerNav>
         <Bar
           n={1}
           onClick={() => {
-            setOpen(!open);
+            if (!open) setOpen(!open);
           }}
           onTransitionEnd={() => {
             setShowNav(open);
@@ -99,11 +111,11 @@ const NavC = ({ currentUser, history, logout }) => {
               {currentUser && <A onClick={logout}>signout</A>}
               {!currentUser && <StyledLink to="/register">signup</StyledLink>}
             </LinkWrapper>
-            {!currentUser && (
+            {/* {!currentUser && (
               <LinkWrapper>
                 <StyledLink to="/rsvp">rsvp</StyledLink>
               </LinkWrapper>
-            )}
+            )} */}
             <LinkWrapper>
               <StyledLink to="/info">info</StyledLink>
             </LinkWrapper>

@@ -8,6 +8,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 10% 1fr 10%;
   grid-row-gap: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const Heading = styled.div`
@@ -17,7 +18,6 @@ export const Heading = styled.div`
   font-weight: 800;
   border-bottom: 1rem white solid;
   width: 53%;
-  margin: auto;
 `;
 
 export const ProfileContainer = styled.div`
@@ -52,10 +52,10 @@ export const Liner = styled.div`
 `;
 
 export const Paragraph = styled.div`
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: 600;
   grid-column: 2;
-  border-bottom: 2rem white dashed;
+  border-bottom: 1rem white dashed;
   padding-bottom: 1rem;
 `;
 

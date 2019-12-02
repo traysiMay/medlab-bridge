@@ -15,13 +15,15 @@ import { Nav } from "@/Nav";
 import { Register } from "@/Register";
 import { RSVP } from "@/RSVP";
 import { Info } from "@/Info";
+import { Home } from "@/Home";
 
-const ZApp = ({ showNav, currentUser, logout, url }) => {
+const ZApp = ({ showNav, currentUser, logout }) => {
   return (
     <div>
       {showNav && <Nav currentUser={currentUser} logout={logout} />}
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />
+        <Route path="/home" component={Home} />
         <Route path={["/ch1/:stato", "/ch1"]} component={ChapterOne} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
@@ -55,9 +57,10 @@ class App extends React.Component {
   }
 
   render() {
+    // worched not necessary unless I do another event?
     const { currentUser, worched } = this.state;
-    const showNav = currentUser || worched ? true : false;
-    const p = history.location.pathname;
+    // const showNav = currentUser || worched ? true : false;
+    const showNav = true;
     const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "";
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
