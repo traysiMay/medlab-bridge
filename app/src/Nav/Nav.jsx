@@ -28,8 +28,8 @@ const animator = (color, end, obj, transformation) => {
   animate();
 };
 const NavC = ({ currentUser, history, logout }) => {
-  const [open, setOpen] = useState(false);
-  const [showNav, setShowNav] = useState(false);
+  const [open, setOpen] = useState(window.innerWidth > 768);
+  const [showNav, setShowNav] = useState(window.innerWidth > 768);
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
       console.log("resize open");
@@ -103,6 +103,9 @@ const NavC = ({ currentUser, history, logout }) => {
           open={open}
         >
           <NavContainer open={open} show={showNav}>
+            <LinkWrapper>
+              <StyledLink to="/home">home</StyledLink>
+            </LinkWrapper>
             <LinkWrapper>
               {currentUser && <StyledLink to="/init">ticket</StyledLink>}
               {!currentUser && <StyledLink to="/login">signin</StyledLink>}
