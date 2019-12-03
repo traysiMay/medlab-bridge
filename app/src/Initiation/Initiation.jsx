@@ -33,6 +33,7 @@ import {
   RepeatWrapping,
   ObjectLoader
 } from "three";
+import { Loading } from "./Loading";
 import smoke from "./smoke.png";
 import toad from "./yellowDog.json";
 let scene;
@@ -67,14 +68,11 @@ const Initiation = () => {
     toadService
       .getYours()
       .then(toads => {
-        console.log("hielo");
-        console.log(toads);
         setToads(toads);
         setQR(toads[0].qrPng);
 
         web3Service.getURI(toads[0].id).then(uri => {
           const { r, g, b } = JSON.parse(uri);
-          console.log(r, g, b);
           material.color = new Color(`rgb(${r},${g},${b})`);
           shroom.children[0].material.color = new Color(`rgb(${r},${g},${b})`);
           shroom.children[2].material.color = new Color(`rgb(${r},${g},${b})`);
@@ -94,7 +92,8 @@ const Initiation = () => {
     const camera = new PerspectiveCamera(75, w / h, 0.1, 1000);
     const renderer = new WebGLRenderer();
     renderer.setSize(w, h);
-    document.getElementById("three").appendChild(renderer.domElement);
+    const threetainer = document.getElementById("three");
+    threetainer.appendChild(renderer.domElement);
 
     const geometry = new SphereGeometry(3, 32, 32);
     const texture = new TextureLoader().load(smoke);
@@ -129,11 +128,11 @@ const Initiation = () => {
       renderer.render(scene, camera);
     };
     animate();
-    document.querySelector("canvas").style.width = "50%";
-    document.querySelector("canvas").style.height = "50%";
+    threetainer.querySelector("canvas").style.width = "50%";
+    threetainer.querySelector("canvas").style.height = "50%";
     return () => {
       window.cancelAnimationFrame(rendgar);
-      document.querySelector("canvas").remove();
+      threetainer.querySelector("canvas").remove();
     };
   }, []);
 
@@ -196,7 +195,11 @@ const Initiation = () => {
   return (
     <Fragment>
       <SporeContainer id="three"></SporeContainer>
-      {loading && <Liner>loading...</Liner>}
+      {loading && (
+        <Liner>
+          <Loading />
+        </Liner>
+      )}
       {!loading && (
         <ProfileContainer>
           {booped && (
@@ -206,8 +209,6 @@ const Initiation = () => {
               <Liner>Sprouted from the Mycelium blockchain</Liner>
             </Fragment>
           )}
-          {/* <img src={IMG} /> */}
-          {/* <Header>hi {currentUser.raptorname}!</Header> */}
           {!QR && (
             <EmptyToadContainer>
               <Paragraph>CHAPTER 1</Paragraph>
