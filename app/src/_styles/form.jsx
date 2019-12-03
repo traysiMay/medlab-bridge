@@ -94,7 +94,7 @@ export const Download = styled.a`
 `;
 
 export const RequestError = styled.div`
-  font-size: 4rem;
+  font-size: 1rem;
   font-weight: 700;
   color: rgb(232, 117, 117);
   margin: 0rem 4rem 0rem;
