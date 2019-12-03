@@ -47,16 +47,21 @@ export const Liner = styled.div`
   font-weight: 500;
   &.last {
     color: red;
-    border-bottom: 3rem white dashed;
+    border-bottom: 0.7rem white dashed;
   }
 `;
 
 export const Paragraph = styled.div`
-  font-size: 2rem;
+  /* font-size: 2rem;
   font-weight: 600;
   grid-column: 2;
   border-bottom: 1rem white dashed;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem; */
+  font-size: 1.4rem;
+  font-weight: 600;
+  grid-column: 2;
+  border-bottom: 0.3rem white dashed;
+  padding-bottom: 0.6rem;
 `;
 
 export const MRow = styled.div`
@@ -72,7 +77,7 @@ export const WhiteButton = styled.div`
   border-radius: 6rem;
   font-weight: bold;
   font-size: 4rem;
-  width: 34rem;
+  width: 12rem;
   margin: auto;
   cursor: pointer;
   &:hover {

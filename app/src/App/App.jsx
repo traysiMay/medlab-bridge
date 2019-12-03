@@ -24,7 +24,7 @@ const ZApp = ({ showNav, currentUser, logout }) => {
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />
         <Route path="/home" component={Home} />
-        <Route path={["/ch1/:stato", "/ch1"]} component={ChapterOne} />
+        {/* <Route path={["/ch1/:stato", "/ch1"]} component={ChapterOne} /> */}
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />
@@ -40,7 +40,7 @@ class App extends React.Component {
 
     this.state = {
       currentUser: null,
-      worched: false
+      worched: true
     };
   }
 

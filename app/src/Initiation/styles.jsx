@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const EmptyToadContainer = styled.div`
   display: grid;
   grid-column: 2;
-  grid-row-gap: 6rem;
-  padding: 4rem;
-  border: 2rem white solid;
+  grid-row-gap: 1.9rem;
+  padding: 1.2rem;
+  border: 1rem white solid;
 `;
 
 export const ToadContainer = styled.div`
   background: rgb(235, 60, 60);
-  border: 2rem white solid;
+  border: 1rem white solid;
   grid-column: 2;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -25,23 +25,22 @@ export const ToadContainer = styled.div`
 export const HeaderName = styled.h1`
   grid-area: headername;
   text-align: center;
-  font-size: 6rem;
+  font-size: 2rem;
   text-transform: uppercase;
-  border-bottom: 1rem white solid;
+  border-bottom: 0.4rem white solid;
   margin: 3rem;
   overflow-wrap: break-word;
 `;
 export const HeaderIcon = styled.h1`
   grid-area: headericon;
   text-align: center;
-  font-size: 9rem;
-  border: 45px white solid;
-  border-radius: 21rem;
-  width: 11rem;
+  font-size: 5rem;
+  border: 11px white solid;
+  border-radius: 18rem;
+  width: 6rem;
   margin: auto;
   color: black;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: -1.6rem;
   background: #a6899d;
 `;
 
@@ -70,28 +69,31 @@ export const QRSpace = styled.div`
   grid-template-areas:
     "qr qr"
     "admit admit";
-  border: 60px black solid;
-  padding: 3rem;
-  margin: 2rem;
+  border: 10px black solid;
+  padding: 0rem;
+  margin: 1rem;
 `;
 
 export const Qr = styled.img`
   grid-area: qr;
-  border: 3rem white solid;
+  border: 1rem white solid;
+  width: 87%;
   margin: auto;
 `;
 
 export const Admit = styled.div`
   grid-area: admit;
-  font-size: 3rem;
+  font-size: 1rem;
+  -webkit-letter-spacing: 0.1rem;
+  -moz-letter-spacing: 0.1rem;
+  -ms-letter-spacing: 0.1rem;
   letter-spacing: 0.1rem;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 0rem 0rem;
   font-weight: bold;
   color: black;
-  border: 3rem white solid;
+  border: 1rem white solid;
   background: #e94003;
-  margin: 3rem;
   p {
     font-size: 8rem;
     margin: 1rem;
@@ -100,12 +102,12 @@ export const Admit = styled.div`
 `;
 
 export const BottomLine = styled.div`
-  font-size: 4rem;
+  font-size: 1.2rem;
   text-align: right;
-  border-bottom: 1rem black dashed;
+  border-bottom: 0.5rem black dashed;
   margin: 1rem;
   padding: 1rem;
-  font-weight: bold;
+  font-weight: 700;
 `;
 
 export const SporeContainer = styled.div`
