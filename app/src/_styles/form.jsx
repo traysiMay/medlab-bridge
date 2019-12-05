@@ -4,12 +4,10 @@ import { Field, Form, ErrorMessage } from "formik";
 export const CContainer = styled.div`
   display: grid;
   justify-content: center;
-  background: white;
-  color: black;
+  background: black;
+  color: white;
   margin: 1rem auto 4rem auto;
-  border: 3px black solid;
-  box-shadow: 15px 17px white;
-  width: 96%;
+  border: 3px white solid;
   max-width: 32rem;
   padding: 0.6rem;
   grid-template-columns: 1fr 1fr 1fr;

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { MEDLAB } from "./MEDLAB";
 import { withRouter } from "react-router-dom";
 import {
@@ -11,7 +11,24 @@ import {
   StyledLink,
   LogoWrapper
 } from "./styles";
+import styled from "styled-components";
 
+const OverlayNav = styled.div`
+  position: absolute;
+  top: -0.372263rem;
+  left: 1.2525547445255474rem;
+  border-left: 2px white solid;
+  border-bottom: 2px white solid;
+  padding: 0.5rem;
+  background: black;
+  z-index: 5;
+  height: ${props => props.height}rem;
+  width: 6rem;
+  border-right: 2px white solid;
+  color: black;
+  opacity: ${props => props.height};
+  transition: height 2s, opacity 2s;
+`;
 const animator = (color, end, obj, transformation) => {
   let count = 0;
   let req;
@@ -30,6 +47,7 @@ const animator = (color, end, obj, transformation) => {
 const NavC = ({ currentUser, history, logout }) => {
   const [open, setOpen] = useState(window.innerWidth > 768);
   const [showNav, setShowNav] = useState(window.innerWidth > 768);
+  const overlay = useRef();
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
       console.log("resize open");
@@ -80,18 +98,63 @@ const NavC = ({ currentUser, history, logout }) => {
     );
   };
 
+  const onHam = () => setOpen(!open);
+
+  const closeOverlay = e => {
+    console.log(e.target);
+    if (e.target.id === "overlay") return e.stopPropagation();
+    setOpen(false);
+  };
+  // if (open) {
+  //   document.body.addEventListener("click", closeOverlay, false);
+  //   document.body.addEventListener("touchstart", closeOverlay, false);
+  // } else {
+  //   document.body.removeEventListener("click", closeOverlay, false);
+  //   document.body.removeEventListener("touchstart", closeOverlay, false);
+  // }
   return (
     <Fragment>
-      <LogoWrapper>
-        <MEDLAB
-          goHome={goHome}
-          onCircle={onCircle}
-          onHex={onHex}
-          onSquare={onSquare}
-          onTriangle={onTriangle}
-        />
-      </LogoWrapper>
-      <LowerNav>
+      <div style={{ position: "relative" }}>
+        <LogoWrapper>
+          <MEDLAB
+            goHome={goHome}
+            onCircle={onCircle}
+            onHex={onHex}
+            onSquare={onSquare}
+            onTriangle={onTriangle}
+            onHam={onHam}
+          />
+        </LogoWrapper>
+        <OverlayNav
+          height={open ? 10 : 0}
+          onTransitionEnd={() => setShowNav(true)}
+          id={"overlay"}
+        >
+          <NavContainer
+            open={open}
+            show={showNav}
+            onClick={e => e.stopPropagation()}
+          >
+            <LinkWrapper>
+              <StyledLink onClick={e => e.stopPropagation()} to="/home">
+                home
+              </StyledLink>
+            </LinkWrapper>
+            <LinkWrapper>
+              {currentUser && <StyledLink to="/init">ticket</StyledLink>}
+              {!currentUser && <StyledLink to="/login">signin</StyledLink>}
+            </LinkWrapper>
+            <LinkWrapper>
+              {currentUser && <A onClick={logout}>signout</A>}
+              {!currentUser && <StyledLink to="/register">signup</StyledLink>}
+            </LinkWrapper>
+            <LinkWrapper>
+              <StyledLink to="/info">info</StyledLink>
+            </LinkWrapper>
+          </NavContainer>
+        </OverlayNav>
+
+        {/* <LowerNav>
         <Bar
           n={1}
           onClick={() => {
@@ -114,11 +177,6 @@ const NavC = ({ currentUser, history, logout }) => {
               {currentUser && <A onClick={logout}>signout</A>}
               {!currentUser && <StyledLink to="/register">signup</StyledLink>}
             </LinkWrapper>
-            {/* {!currentUser && (
-              <LinkWrapper>
-                <StyledLink to="/rsvp">rsvp</StyledLink>
-              </LinkWrapper>
-            )} */}
             <LinkWrapper>
               <StyledLink to="/info">info</StyledLink>
             </LinkWrapper>
@@ -137,7 +195,21 @@ const NavC = ({ currentUser, history, logout }) => {
           }}
         />
         <Smiler></Smiler>
-      </LowerNav>
+      </LowerNav> */}
+      </div>
+      <div
+        onClick={closeOverlay}
+        style={{
+          display: open ? "block" : "none",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          opacity: 0,
+          width: "100%",
+          height: "100%",
+          background: "red"
+        }}
+      ></div>
     </Fragment>
   );
 };

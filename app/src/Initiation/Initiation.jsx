@@ -200,16 +200,16 @@ const Initiation = () => {
           <Loading />
         </Liner>
       )}
-      {!loading && (
-        <ProfileContainer>
-          {booped && (
-            <Fragment>
-              <Liner>{`hi ${currentUser.raptorname}`}</Liner>
-              <Liner>This is your Alpha Toad :)</Liner>
-              <Liner>Sprouted from the Mycelium blockchain</Liner>
-            </Fragment>
-          )}
-          {!QR && (
+      {/* {!loading && ( */}
+      <ProfileContainer>
+        {!booped && (
+          <Fragment>
+            <Liner>{`hi ${currentUser.raptorname}`}</Liner>
+            <Liner>This is your Alpha Toad :)</Liner>
+            <Liner>Sprouted from the Mycelium blockchain</Liner>
+          </Fragment>
+        )}
+        {/* {!QR && (
             <EmptyToadContainer>
               <Paragraph>CHAPTER 1</Paragraph>
               <Paragraph>VALENCIA ROOM</Paragraph>
@@ -239,9 +239,9 @@ const Initiation = () => {
                 <BottomLine>NOV 2</BottomLine>
               </div>
             </ToadContainer>
-          )}
-        </ProfileContainer>
-      )}
+          )} */}
+      </ProfileContainer>
+      {/* )} */}
     </Fragment>
   );
 };

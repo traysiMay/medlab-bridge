@@ -27,7 +27,7 @@ export const Bar = styled.div`
 
 export const NavContainer = styled.div`
   /* transition: opacity 0.5s; */
-  display: ${props => (props.open ? "flex" : "none")};
+  display: ${props => (props.open ? "block" : "none")};
   opacity: ${props => (props.show ? 1 : 0)};
 `;
 
