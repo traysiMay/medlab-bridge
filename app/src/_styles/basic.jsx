@@ -42,10 +42,15 @@ export const Header = styled.h1`
 `;
 
 export const Liner = styled.div`
-  font-size: 5rem;
-  grid-column: 2;
+  font-size: 2rem;
+  grid-column: 1/2;
   font-weight: 500;
-  &.last {
+  border-bottom: 0.3rem white dashed;
+  padding: 1rem;
+  &:first-of-type {
+    font-size: 4rem;
+  }
+  &:last-of-type {
     color: red;
     border-bottom: 0.7rem white dashed;
   }

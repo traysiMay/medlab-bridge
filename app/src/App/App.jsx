@@ -16,6 +16,7 @@ import { Register } from "@/Register";
 import { RSVP } from "@/RSVP";
 import { Info } from "@/Info";
 import { Home } from "@/Home";
+import { ChapterTwo } from "@/ChapterTwo";
 
 const ZApp = ({ showNav, currentUser, logout }) => {
   return (
@@ -25,6 +26,7 @@ const ZApp = ({ showNav, currentUser, logout }) => {
         <PrivateRoute exact path="/init" component={Initiation} />
         <Route path="/home" component={Home} />
         {/* <Route path={["/ch1/:stato", "/ch1"]} component={ChapterOne} /> */}
+        <Route path={["/ch2/"]} component={ChapterTwo} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path={["/rsvp/:hollaback", "/rsvp"]} component={RSVP} />

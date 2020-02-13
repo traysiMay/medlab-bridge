@@ -1,13 +1,10 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { MEDLAB } from "./MEDLAB";
 import { withRouter } from "react-router-dom";
 import {
   A,
-  Bar,
   LinkWrapper,
-  LowerNav,
   NavContainer,
-  Smiler,
   StyledLink,
   LogoWrapper
 } from "./styles";
@@ -23,11 +20,11 @@ const OverlayNav = styled.div`
   background: black;
   z-index: 5;
   height: ${props => props.height}rem;
-  width: 6rem;
+  width: 8rem;
   border-right: 2px white solid;
   color: black;
   opacity: ${props => props.height};
-  transition: height 2s, opacity 2s;
+  transition: height 0.5s, opacity 0.8s;
 `;
 const animator = (color, end, obj, transformation) => {
   let count = 0;
@@ -47,7 +44,6 @@ const animator = (color, end, obj, transformation) => {
 const NavC = ({ currentUser, history, logout }) => {
   const [open, setOpen] = useState(window.innerWidth > 768);
   const [showNav, setShowNav] = useState(window.innerWidth > 768);
-  const overlay = useRef();
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
       console.log("resize open");
@@ -101,17 +97,9 @@ const NavC = ({ currentUser, history, logout }) => {
   const onHam = () => setOpen(!open);
 
   const closeOverlay = e => {
-    console.log(e.target);
-    if (e.target.id === "overlay") return e.stopPropagation();
     setOpen(false);
   };
-  // if (open) {
-  //   document.body.addEventListener("click", closeOverlay, false);
-  //   document.body.addEventListener("touchstart", closeOverlay, false);
-  // } else {
-  //   document.body.removeEventListener("click", closeOverlay, false);
-  //   document.body.removeEventListener("touchstart", closeOverlay, false);
-  // }
+
   return (
     <Fragment>
       <div style={{ position: "relative" }}>
@@ -126,7 +114,7 @@ const NavC = ({ currentUser, history, logout }) => {
           />
         </LogoWrapper>
         <OverlayNav
-          height={open ? 10 : 0}
+          height={open ? 13 : 0}
           onTransitionEnd={() => setShowNav(true)}
           id={"overlay"}
         >
@@ -138,6 +126,11 @@ const NavC = ({ currentUser, history, logout }) => {
             <LinkWrapper>
               <StyledLink onClick={e => e.stopPropagation()} to="/home">
                 home
+              </StyledLink>
+            </LinkWrapper>
+            <LinkWrapper>
+              <StyledLink onClick={e => e.stopPropagation()} to="/ch2">
+                chapter two
               </StyledLink>
             </LinkWrapper>
             <LinkWrapper>

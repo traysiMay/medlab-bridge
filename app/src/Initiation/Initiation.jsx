@@ -36,6 +36,7 @@ import {
 import { Loading } from "./Loading";
 import smoke from "./smoke.png";
 import toad from "./yellowDog.json";
+import { CContainer } from "../_styles/form";
 let scene;
 let material;
 let spore;
@@ -202,11 +203,24 @@ const Initiation = () => {
       )}
       {/* {!loading && ( */}
       <ProfileContainer>
+        {booped && (
+          <Fragment>
+            <CContainer>
+              <Liner>{`hi ${currentUser.raptorname}`}</Liner>
+              <Liner>This is your Alpha Toad :)</Liner>
+              <Liner>Sprouted from the Mycelium blockchain</Liner>
+              <Liner>Stay tuned for more info</Liner>
+            </CContainer>
+          </Fragment>
+        )}
         {!booped && (
           <Fragment>
-            <Liner>{`hi ${currentUser.raptorname}`}</Liner>
-            <Liner>This is your Alpha Toad :)</Liner>
-            <Liner>Sprouted from the Mycelium blockchain</Liner>
+            <CContainer>
+              <Liner>{`hi ${currentUser.raptorname}`}</Liner>
+              <Liner>Unfortunately you missed the alpha toad</Liner>
+              <Liner>but there will be more toads</Liner>
+              <Liner>Stay tuned for more info</Liner>
+            </CContainer>
           </Fragment>
         )}
         {/* {!QR && (

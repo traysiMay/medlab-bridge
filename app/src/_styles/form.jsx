@@ -3,10 +3,13 @@ import { Field, Form, ErrorMessage } from "formik";
 
 export const CContainer = styled.div`
   display: grid;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
   justify-content: center;
   background: black;
   color: white;
-  margin: 1rem auto 4rem auto;
+  margin: 1rem 1rem 4rem 1rem;
   border: 3px white solid;
   max-width: 32rem;
   padding: 0.6rem;
@@ -14,9 +17,12 @@ export const CContainer = styled.div`
 `;
 
 export const Header = styled.div`
+  font-size: 4rem;
   grid-column: 1 / 4;
-  text-align: center;
   text-decoration: underline;
+  h2 {
+    margin: -1rem 0 1rem;
+  }
 `;
 
 export const Body = styled.div`
@@ -24,16 +30,17 @@ export const Body = styled.div`
 `;
 
 export const Label = styled.label`
-  font-weight: bolder;
-  margin: auto;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: auto 1rem;
 `;
 
 export const StyledField = styled(Field)`
   text-align: center;
   padding: 1rem;
-  margin: 1.5rem auto;
+  margin: 0.6rem 1.2rem;
   outline: none;
-  border: 6px white solid;
+  border: 0.2rem white solid;
   background: black !important;
   color: white !important;
   box-shadow: black !important;
@@ -56,12 +63,12 @@ export const StyledForm = styled(Form)`
 
 export const Button = styled.button`
   background: black;
-  width: 10rem;
+  width: 5rem;
   margin: 1rem auto;
-  height: 6.3rem;
+  height: 5rem;
   border-radius: 80px 81px;
   border-width: 1rem;
-  border-color: white;
+  border-color: blueviolet;
   font-size: 1rem;
   color: white;
   cursor: pointer;
@@ -69,14 +76,14 @@ export const Button = styled.button`
 
 export const StyledErrorMessage = styled(ErrorMessage)`
   margin: 0 auto;
-  color: rgb(232, 117, 117);
   font-size: 1rem;
   margin-top: -0.6rem;
   margin-bottom: 1.2rem;
   text-align: center;
   padding: 0.7rem;
-  background: #fffbfb;
+  background: none;
   width: 80%;
+  color: #ff7a7a;
 `;
 
 export const DownloadWrapper = styled.div`
