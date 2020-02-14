@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Phase1 from "./Phase1";
 import Phase2 from "./Phase2";
+import Phase3 from "./Phase3";
 
 const ChapterTwo = () => {
   const [phase, setPhase] = useState(1);
@@ -21,7 +22,7 @@ const ChapterTwo = () => {
     <div>
       {phase === 1 && <Phase1 setPhase={setPhase} />}
       {phase === 2 && <Phase2 setPhase={setPhase} />}
-      {phase === 3 && <div>phase 3</div>}
+      {phase === 3 && <Phase3 setPhase={setPhase} />}
     </div>
   );
 };

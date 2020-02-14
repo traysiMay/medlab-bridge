@@ -12,7 +12,7 @@ const BlackHeading = styled(Heading)`
   padding-bottom: 2rem;
   max-width: ${window.innerWidth};
   font-size: 4rem;
-  margin: 1rem 0;
+  margin: -1rem 0;
   text-align: ${props => props.align};
   width: 80%;
 `;
@@ -30,7 +30,9 @@ const Phase1 = ({ setPhase }) => {
 
   return (
     <Container>
-      <BlackHeading align={"left"}>welcome to chapter two</BlackHeading>
+      <BlackHeading align={"left"} style={{ margin: "1rem 0" }}>
+        welcome to chapter two
+      </BlackHeading>
       <Paragraph onClick={() => setPauseM8(!pauseM8)}>
         <Lottie
           options={{ loop: true, autoplay: true, animationData: M8 }}

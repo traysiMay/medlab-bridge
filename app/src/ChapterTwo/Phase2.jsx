@@ -1,12 +1,9 @@
 import React from "react";
 import { createCanvas } from "canvas";
 import { useEffect } from "react";
+import * as Tone from "tone";
+import { getRandomInt } from "./utils";
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 const w = window.innerWidth;
 const h = window.innerHeight * 0.8;
 const bubbles = [];
@@ -17,7 +14,7 @@ for (let i = 1; i < 20; i++) {
     yC: getRandomInt(50, h - 50),
     radius: 0,
     id: i,
-    color: "red",
+    color: "#84ff96",
     rate: Math.random() + 0.2,
     popped: false,
     vanish: false
@@ -30,6 +27,8 @@ const Phase2 = ({ setPhase }) => {
     const canvas = createCanvas(w, h);
     canvas.style.margin = "auto";
     canvas.style.display = "block";
+    canvas.style.cursor = "pointer";
+    canvas.style.webkitTapHighlightColor = "rgba(255, 255, 255, 0)";
     const ctx = canvas.getContext("2d");
     const startTime = Date.now();
     let frame;
@@ -47,9 +46,14 @@ const Phase2 = ({ setPhase }) => {
           (maxR +
             Math.sin((b.id * 1000 + diff) * Math.PI * 0.001 * b.rate) * maxR);
         ctx.arc(b.xC, b.yC, b.vanish ? 0 : radius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = b.color;
+        if (!b.popped) {
+          ctx.fillStyle = b.color;
+        } else {
+          const colour = diff % 2 === 0 ? "red" : "blue";
+          ctx.fillStyle = colour;
+        }
         ctx.fill();
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 2;
         ctx.strokeStyle = "white";
         ctx.stroke();
         b.radius = radius;
@@ -67,15 +71,21 @@ const Phase2 = ({ setPhase }) => {
       const rect = canvas.getBoundingClientRect();
       const xP = e.clientX - rect.left;
       const yP = e.clientY - rect.top;
+      const synth = new Tone.Synth().toMaster();
 
+      let success = false;
       bubbles.map(b => {
         const d = Math.pow(xP - b.xC, 2) + Math.pow(yP - b.yC, 2);
         if (d <= Math.pow(b.radius, 2)) {
           console.log("inside", b.id);
           b.color = "yellow";
           b.popped = true;
+          success = true;
+        }
+        if (success) {
+          synth.triggerAttackRelease("C5", "8n");
         } else {
-          console.log("out");
+          synth.triggerAttackRelease("C4", "8n");
         }
       });
     });
