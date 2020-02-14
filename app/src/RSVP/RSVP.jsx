@@ -35,7 +35,7 @@ const event = "raptorhole";
 const Line1 = styled.div`
   text-align: center;
   padding: 4rem;
-  font-size: 6rem;
+  font-size: 3rem;
 `;
 
 const Line2 = styled.div`
@@ -43,12 +43,12 @@ const Line2 = styled.div`
   font-size: 3rem;
   margin: 1rem;
   margin-top: 4rem;
-  margin-bottom: 10rem;
+  margin-bottom: 6rem;
 `;
 
 const AHead = styled(Head)`
   font-size: 10rem;
-  top: 0;
+  top: 2.8rem;
 `;
 
 const RSVP = ({ history, match }) => {
@@ -105,13 +105,15 @@ const RSVP = ({ history, match }) => {
       <div style={{ height: "10rem" }}>
         <AHead ref={head}>:)</AHead>
       </div>
-      <PosterContainer>
+      {/* <PosterContainer>
         <Syzygy />
-      </PosterContainer>
-      <CContainer style={qr ? { padding: "0", width: "100%" } : {}}>
-        <Header>
-          <h3>RSVP</h3>
-        </Header>
+      </PosterContainer> */}
+      <CContainer style={qr ? { padding: "0", width: "92%" } : {}}>
+        {!qr && (
+          <Header>
+            <h3 style={{ margin: "1.6rem 1rem" }}>RSVP</h3>
+          </Header>
+        )}
 
         <Body>
           {alreadyAccount && (
@@ -146,22 +148,22 @@ const RSVP = ({ history, match }) => {
               {message}
             </DownloadWrapper> */}
               <ToadContainer>
-                <HeaderName>{emailRef.current}</HeaderName>
-                <HeaderIcon>!</HeaderIcon>
-                <QRSpace>
+                {/* <HeaderName>{emailRef.current}</HeaderName> */}
+                {/* <HeaderIcon>!</HeaderIcon> */}
+                <QRSpace style={{ background: "white" }}>
                   <Qr src={qr} />
                   <Admit>
                     ADMIT <p>2</p>
                   </Admit>
                 </QRSpace>
                 <div style={{ gridArea: "toadman", padding: "2rem" }}>
-                  <BottomLine> VALENCIA ROOM </BottomLine>
-                  <BottomLine>NOV 2</BottomLine>
+                  <BottomLine> MONARCH </BottomLine>
+                  <BottomLine>MAY 8</BottomLine>
                 </div>
               </ToadContainer>
             </div>
           )}
-          {!qr && (!alreadySigned && !alreadyAccount) && (
+          {!qr && !alreadySigned && !alreadyAccount && (
             <Formik
               initialValues={{
                 username: "",
@@ -240,7 +242,12 @@ const RSVP = ({ history, match }) => {
           )}
         </Body>
       </CContainer>
-      <CContainer>
+      {qr && (
+        <Download href={`${qr}`} download="littlebabychicje.png">
+          DOWNLOAD
+        </Download>
+      )}
+      {/* <CContainer>
         <Header>
           <h3>INFO</h3>
         </Header>
@@ -254,7 +261,7 @@ const RSVP = ({ history, match }) => {
           <Line2>Bring your weird self</Line2>
           :)
         </Body>
-      </CContainer>
+      </CContainer> */}
     </div>
   );
 };

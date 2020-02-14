@@ -94,8 +94,12 @@ export const DownloadWrapper = styled.div`
 `;
 export const Download = styled.a`
   color: white;
-  font-size: 4rem;
+  font-size: 3rem;
+  -webkit-text-decoration: none;
   text-decoration: none;
+  text-align: center;
+  display: block;
+  margin: -3rem 0 1rem;
 `;
 
 export const RequestError = styled.div`

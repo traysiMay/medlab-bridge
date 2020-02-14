@@ -81,9 +81,9 @@ export const WhiteButton = styled.div`
   text-align: center;
   border-radius: 6rem;
   font-weight: bold;
-  font-size: 4rem;
+  font-size: 2.4rem;
   width: 12rem;
-  margin: auto;
+  margin: 3rem auto;
   cursor: pointer;
   &:hover {
     background: red;

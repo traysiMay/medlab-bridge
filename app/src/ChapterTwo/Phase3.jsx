@@ -39,11 +39,12 @@ function typeTime() {
   container.style.width = "100%";
   container.style.fontSize = "2rem";
   container.innerHTML = "";
+  container.style.caretColor = "white";
   const cursor = document.createElement("span");
   cursor.style.fontSize = "2rem";
   cursor.innerHTML = "|";
   const alert = document.getElementById("alert");
-
+  container.focus();
   let on = true;
   setInterval(() => {
     if (on) {
@@ -55,6 +56,13 @@ function typeTime() {
   }, 500);
   container.appendChild(cursor);
   document.addEventListener("keyup", function(e) {
+    cursor.remove();
+    container.style.caretColor =
+      "#" +
+      Math.random()
+        .toString(16)
+        .substr(-6);
+
     if (e.key === "Enter" && e.target.id === "container") {
       container.style.color = "red";
       container.contentEditable = false;
@@ -66,6 +74,7 @@ function typeTime() {
           container.style.color = "black";
           container.contentEditable = true;
           container.innerHTML = "";
+          container.focus();
         }, 1000);
       } else {
         alert.style.display = "block";
@@ -73,14 +82,21 @@ function typeTime() {
         setTimeout(() => {
           alert.style.display = "none";
           container.innerHTML = "";
-        }, 1000);
+        }, 3000);
       }
     }
   });
   container.addEventListener("focus", () => cursor.remove());
 }
 
-const responses = ["wat", "ah!", "huh", "erg!", "eeeeee!"];
+const responses = [
+  "wat",
+  "ah!",
+  "huh",
+  "erg!",
+  "eeeeee!",
+  "shit what did you do!!"
+];
 
 const Phase3 = () => {
   useEffect(() => {
@@ -112,7 +128,7 @@ const Phase3 = () => {
         setTimeout(() => {
           container.innerHTML = "";
           typeTime();
-        }, 4600);
+        }, 5000);
         cancelAnimationFrame(frame);
       }
     }

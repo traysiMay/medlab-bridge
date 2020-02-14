@@ -9,7 +9,7 @@ export const EmptyToadContainer = styled.div`
 `;
 
 export const ToadContainer = styled.div`
-  background: rgb(235, 60, 60);
+  background: rgb(60, 235, 227);
   border: 1rem white solid;
   grid-column: 2;
   display: grid;
@@ -93,7 +93,7 @@ export const Admit = styled.div`
   font-weight: bold;
   color: black;
   border: 1rem white solid;
-  background: #e94003;
+  background: #c5ffb2;
   p {
     font-size: 8rem;
     margin: 1rem;
