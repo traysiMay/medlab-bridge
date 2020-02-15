@@ -18,7 +18,7 @@ import { createCanvas } from "canvas";
 const qr65 =
   "data:image/png;base64,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";
 import ticketTemplate from "../assets/ticketTemplate.png";
-import { Paragraph } from "../_styles/basic";
+import { Paragraph, Header } from "../_styles/basic";
 import {
   Scene,
   PerspectiveCamera,
@@ -57,6 +57,8 @@ const Initiation = () => {
 
   const [yesText, setYesText] = useState("YA");
 
+  const head = useRef();
+
   const createToad = () => {
     toadService.createToad("alpha", "raptorhole").then(toad => {
       setQR(toad.qrPng);
@@ -69,9 +71,9 @@ const Initiation = () => {
     toadService
       .getYours()
       .then(toads => {
+        console.log(toads);
         setToads(toads);
         setQR(toads[0].qrPng);
-
         web3Service.getURI(toads[0].id).then(uri => {
           const { r, g, b } = JSON.parse(uri);
           material.color = new Color(`rgb(${r},${g},${b})`);
@@ -80,6 +82,7 @@ const Initiation = () => {
         });
       })
       .catch(e => {
+        setCurrentUser({ ...currentUser, beta: null });
         setLoading(false);
       });
   };
@@ -141,10 +144,10 @@ const Initiation = () => {
   useEffect(() => {
     if (toads.length === 0) return;
     if (booped === true) return;
-
     const intervalId = setInterval(call, 1000);
 
     function call() {
+      // this just returns the boops
       web3Service.getToad(toads[0].id).then(hi => {
         setLoading(false);
         if (hi === false) {
@@ -177,6 +180,7 @@ const Initiation = () => {
     };
     t.src = ticketTemplate;
   }, [sixFour]);
+
   useEffect(() => {
     if (toads.length > 0) return;
     let counter = 0;
@@ -193,17 +197,51 @@ const Initiation = () => {
     loopYes();
     return () => clearTimeout(req);
   }, [toads]);
+
+  useEffect(() => {
+    console.log(head);
+    console.log(document.getElementById("head"));
+    if (!head.current) return;
+    let req;
+    let counter = 0;
+    const dumbLoop = () => {
+      const animate = () => {
+        req = window.requestAnimationFrame(animate);
+        head.current.style.transform = `rotate3d(1, 1, 1, ${counter}deg)`;
+        counter++;
+      };
+      animate();
+    };
+    dumbLoop();
+    return () => {
+      window.cancelAnimationFrame(req);
+    };
+  }, [beta, head]);
+
+  const { beta } = currentUser;
   return (
     <Fragment>
-      <SporeContainer id="three"></SporeContainer>
       {loading && (
         <Liner>
           <Loading />
         </Liner>
       )}
+      {beta === null && (
+        <Fragment>
+          <CContainer>
+            <Liner>{`${currentUser.raptorname}`}</Liner>
+            <Liner>Would you like a BetaToad?</Liner>
+            <Liner>It will get you into Monarch on May 8</Liner>
+            <Liner id="head" ref={head}>
+              :)
+            </Liner>
+          </CContainer>
+        </Fragment>
+      )}
+      {beta !== null && <SporeContainer id="three"></SporeContainer>}
       {/* {!loading && ( */}
       <ProfileContainer>
-        {booped && (
+        {beta !== null && booped && (
           <Fragment>
             <CContainer>
               <Liner>{`hi ${currentUser.raptorname}`}</Liner>
@@ -213,13 +251,11 @@ const Initiation = () => {
             </CContainer>
           </Fragment>
         )}
-        {!booped && (
+        {beta !== null && !booped && (
           <Fragment>
             <CContainer>
               <Liner>{`hi ${currentUser.raptorname}`}</Liner>
-              <Liner>Unfortunately you missed the alpha toad</Liner>
-              <Liner>but there will be more toads</Liner>
-              <Liner>Stay tuned for more info</Liner>
+              <Liner>see you there :)</Liner>
             </CContainer>
           </Fragment>
         )}

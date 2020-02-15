@@ -13,6 +13,7 @@ function getYours() {
     handleResponse
   );
 }
+
 function createToad(gen, cat) {
   const requestOptions = {
     method: "POST",

@@ -21,7 +21,7 @@ function changeDom(color) {
 }
 
 var i = 0;
-var txt = "Lorem ipsum blabla.";
+var txt = "These pretzels are making me thirsty.";
 var speed = 50;
 function typeWriter() {
   if (i < txt.length) {
@@ -33,7 +33,7 @@ function typeWriter() {
   }
 }
 
-function typeTime() {
+function typeTime(setPhase) {
   const container = document.getElementById("container");
   container.style.height = "100%";
   container.style.width = "100%";
@@ -82,6 +82,8 @@ function typeTime() {
         setTimeout(() => {
           alert.style.display = "none";
           container.innerHTML = "";
+          setPhase(4);
+          localStorage.setItem("phase", 4);
         }, 3000);
       }
     }
@@ -98,7 +100,7 @@ const responses = [
   "shit what did you do!!"
 ];
 
-const Phase3 = () => {
+const Phase3 = ({ setPhase }) => {
   useEffect(() => {
     const startTime = Date.now();
     let frame;
@@ -111,7 +113,6 @@ const Phase3 = () => {
         changeDom("white");
         typeWriter();
       } else {
-        typeWriter();
         changeDom("#FA7171");
       }
       if (diff < 400) {
@@ -127,7 +128,7 @@ const Phase3 = () => {
         changeDom("white");
         setTimeout(() => {
           container.innerHTML = "";
-          typeTime();
+          typeTime(setPhase);
         }, 5000);
         cancelAnimationFrame(frame);
       }

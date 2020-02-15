@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Phase1 from "./Phase1";
 import Phase2 from "./Phase2";
 import Phase3 from "./Phase3";
+import NDA from "./NDA";
 
-const ChapterTwo = () => {
+const ChapterTwo = ({ history }) => {
   const [phase, setPhase] = useState(1);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const ChapterTwo = () => {
       {phase === 1 && <Phase1 setPhase={setPhase} />}
       {phase === 2 && <Phase2 setPhase={setPhase} />}
       {phase === 3 && <Phase3 setPhase={setPhase} />}
+      {phase === 4 && <NDA history={history} />}
     </div>
   );
 };

@@ -63,7 +63,7 @@ const Phase1 = ({ setPhase }) => {
         />
       </Paragraph>
       <BlackHeading align={"left"}>
-        maybe when they are all stopped
+        maybe when they all stop spinning
       </BlackHeading>
     </Container>
   );

@@ -43,12 +43,12 @@ export const Header = styled.h1`
 
 export const Liner = styled.div`
   font-size: 2rem;
-  grid-column: 1/2;
+  grid-column: 1/4;
   font-weight: 500;
   border-bottom: 0.3rem white dashed;
   padding: 1rem;
   &:first-of-type {
-    font-size: 4rem;
+    font-size: 3rem;
   }
   &:last-of-type {
     color: red;
