@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { history } from "@/_helpers";
-import { authenticationService } from "@/_services";
+import { authenticationService, uiService } from "@/_services";
 
 import { PrivateRoute } from "@/_components";
 
@@ -17,11 +17,29 @@ import { RSVP } from "@/RSVP";
 import { Info } from "@/Info";
 import { Home } from "@/Home";
 import { ChapterTwo } from "@/ChapterTwo";
+import Modal from "../_components/Modal";
+import { ModalStyle } from "../_styles/basic";
 
-const ZApp = ({ showNav, currentUser, logout }) => {
+const ZApp = ({ showModal, showNav, currentUser, logout }) => {
   return (
     <div>
       {showNav && <Nav currentUser={currentUser} logout={logout} />}
+      {showModal && (
+        <Modal
+          onClick={() => {
+            uiService.hideModal();
+          }}
+        >
+          <ModalStyle
+            onClick={e => {
+              e.stopPropagation();
+              console.log("hey");
+            }}
+          >
+            shirmp
+          </ModalStyle>
+        </Modal>
+      )}
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />
         <Route path="/home" component={Home} />
@@ -39,10 +57,10 @@ const ZApp = ({ showNav, currentUser, logout }) => {
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentUser: null,
-      nda: false
+      nda: false,
+      showModal: false
     };
   }
 
@@ -51,6 +69,7 @@ class App extends React.Component {
       this.setState({ currentUser: x })
     );
     authenticationService.nda.subscribe(x => this.setState({ nda: x }));
+    uiService.currentModal.subscribe(x => this.setState({ showModal: x }));
   }
 
   logout() {
@@ -60,7 +79,7 @@ class App extends React.Component {
 
   render() {
     // worched not necessary unless I do another event?
-    const { currentUser, nda } = this.state;
+    const { currentUser, nda, showModal } = this.state;
     // const showNav = currentUser || worched ? true : false;
     const showNav = true;
     const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "";
@@ -74,6 +93,7 @@ class App extends React.Component {
                 <ZApp
                   currentUser={currentUser}
                   nda={nda}
+                  showModal={showModal}
                   history={history}
                   logout={this.logout}
                   showNav={showNav}
