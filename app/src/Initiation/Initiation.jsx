@@ -13,7 +13,7 @@ import {
 } from "./styles";
 import { authenticationService, toadService } from "@/_services";
 import { web3Service } from "../_services/web3.service";
-
+import chroma from "chroma-js";
 import { createCanvas } from "canvas";
 const qr65 =
   "data:image/png;base64,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";
@@ -51,18 +51,21 @@ const Initiation = () => {
     authenticationService.currentUserValue
   );
   const [toads, setToads] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [booped, setBooped] = useState(false);
   const [QR, setQR] = useState("");
 
   const [yesText, setYesText] = useState("YA");
 
   const head = useRef();
-
+  const signedNDA = authenticationService.currentNDAValue;
   const createToad = () => {
-    toadService.createToad("alpha", "raptorhole").then(toad => {
+    setLoading(true);
+    toadService.createToad("beta", "meiosis").then(toad => {
+      console.log(toad);
       setQR(toad.qrPng);
       getZeToads();
+      setLoading(false);
     });
   };
 
@@ -74,7 +77,10 @@ const Initiation = () => {
         console.log(toads);
         setToads(toads);
         setQR(toads[0].qrPng);
+        setCurrentUser({ ...currentUser, beta: true });
+
         web3Service.getURI(toads[0].id).then(uri => {
+          console.log(uri);
           const { r, g, b } = JSON.parse(uri);
           material.color = new Color(`rgb(${r},${g},${b})`);
           shroom.children[0].material.color = new Color(`rgb(${r},${g},${b})`);
@@ -82,7 +88,7 @@ const Initiation = () => {
         });
       })
       .catch(e => {
-        setCurrentUser({ ...currentUser, beta: null });
+        setCurrentUser({ ...currentUser, beta: false });
         setLoading(false);
       });
   };
@@ -90,6 +96,10 @@ const Initiation = () => {
   useEffect(() => {
     web3Service.connect();
     getZeToads();
+  }, []);
+
+  useEffect(() => {
+    if (!currentUser.beta) return;
     const w = 500;
     const h = 500;
     scene = new Scene();
@@ -138,7 +148,7 @@ const Initiation = () => {
       window.cancelAnimationFrame(rendgar);
       threetainer.querySelector("canvas").remove();
     };
-  }, []);
+  }, [currentUser.beta]);
 
   // should stop looping when the toad is booped
   useEffect(() => {
@@ -199,26 +209,34 @@ const Initiation = () => {
   }, [toads]);
 
   useEffect(() => {
-    console.log(head);
-    console.log(document.getElementById("head"));
-    if (!head.current) return;
+    if (loading) return;
+    if (!head.current || beta) return;
     let req;
     let counter = 0;
+    const f = chroma.scale(["yellow", "red", "black"]);
     const dumbLoop = () => {
       const animate = () => {
         req = window.requestAnimationFrame(animate);
-        head.current.style.transform = `rotate3d(1, 1, 1, ${counter}deg)`;
+        head.current.style.transform = `rotate3d(0, 1, .1, ${counter /
+          (1.5 + Math.sin(counter * 0.01) * 0.5)}deg)`;
+        const colorWave = 0.5 * (Math.sin(counter * 0.01) + 1);
+        document.getElementById("smiler_cta").style.color = f(colorWave);
         counter++;
       };
       animate();
     };
+    setTimeout(
+      () => (document.getElementById("smiler_cta").style.display = "block"),
+      3000
+    );
     dumbLoop();
     return () => {
       window.cancelAnimationFrame(req);
     };
-  }, [beta, head]);
+  }, [currentUser]);
 
   const { beta } = currentUser;
+  console.log(loading);
   return (
     <Fragment>
       {loading && (
@@ -226,22 +244,58 @@ const Initiation = () => {
           <Loading />
         </Liner>
       )}
-      {beta === null && (
+      {!loading && !beta && (
         <Fragment>
           <CContainer>
             <Liner>{`${currentUser.raptorname}`}</Liner>
             <Liner>Would you like a BetaToad?</Liner>
             <Liner>It will get you into Monarch on May 8</Liner>
-            <Liner id="head" ref={head}>
-              :)
-            </Liner>
+            <div
+              style={{
+                transform: "rotate(90deg)",
+                gridColumn: "2/4",
+                width: "50%"
+              }}
+            >
+              <Liner
+                onClick={() => {
+                  if (!signedNDA) {
+                    return alert("yuou must sign the NDA");
+                  }
+                  createToad();
+                }}
+                id="head"
+                ref={head}
+                style={{
+                  border: "7px white solid",
+                  borderRadius: "50%",
+                  fontSize: "100px",
+                  textAlign: "center"
+                }}
+              >
+                :)
+              </Liner>
+            </div>
+            <div
+              id="smiler_cta"
+              style={{
+                display: "none",
+                textAlign: "center",
+                fontSize: "1.7rem",
+                gridColumn: "1/4"
+              }}
+            >
+              click the smiler!
+            </div>
           </CContainer>
         </Fragment>
       )}
-      {beta !== null && <SporeContainer id="three"></SporeContainer>}
+      {!loading && toads.length > 0 && (
+        <SporeContainer id="three"></SporeContainer>
+      )}
       {/* {!loading && ( */}
       <ProfileContainer>
-        {beta !== null && booped && (
+        {!loading && beta && booped && (
           <Fragment>
             <CContainer>
               <Liner>{`hi ${currentUser.raptorname}`}</Liner>
@@ -251,13 +305,27 @@ const Initiation = () => {
             </CContainer>
           </Fragment>
         )}
-        {beta !== null && !booped && (
-          <Fragment>
-            <CContainer>
-              <Liner>{`hi ${currentUser.raptorname}`}</Liner>
-              <Liner>see you there :)</Liner>
-            </CContainer>
-          </Fragment>
+        {!loading && beta && !booped && (
+          // <Fragment>
+          //   <CContainer>
+          //     <Liner>{`hi ${currentUser.raptorname}`}</Liner>
+          //     <Liner>see you there :)</Liner>
+          //   </CContainer>
+          // </Fragment>
+          <ToadContainer>
+            {/* <HeaderName>{emailRef.current}</HeaderName> */}
+            {/* <HeaderIcon>!</HeaderIcon> */}
+            <QRSpace style={{ background: "white" }}>
+              <Qr src={QR} />
+              <Admit>
+                ADMIT <p>2</p>
+              </Admit>
+            </QRSpace>
+            <div style={{ gridArea: "toadman", padding: "2rem" }}>
+              <BottomLine> MONARCH </BottomLine>
+              <BottomLine>MAY 8</BottomLine>
+            </div>
+          </ToadContainer>
         )}
         {/* {!QR && (
             <EmptyToadContainer>

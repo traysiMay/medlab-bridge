@@ -42,7 +42,7 @@ class App extends React.Component {
 
     this.state = {
       currentUser: null,
-      worched: true
+      nda: false
     };
   }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
     authenticationService.currentUser.subscribe(x =>
       this.setState({ currentUser: x })
     );
-    authenticationService.worched.subscribe(x => this.setState({ worched: x }));
+    authenticationService.nda.subscribe(x => this.setState({ nda: x }));
   }
 
   logout() {
@@ -60,7 +60,7 @@ class App extends React.Component {
 
   render() {
     // worched not necessary unless I do another event?
-    const { currentUser, worched } = this.state;
+    const { currentUser, nda } = this.state;
     // const showNav = currentUser || worched ? true : false;
     const showNav = true;
     const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "";
@@ -73,6 +73,7 @@ class App extends React.Component {
               component={() => (
                 <ZApp
                   currentUser={currentUser}
+                  nda={nda}
                   history={history}
                   logout={this.logout}
                   showNav={showNav}

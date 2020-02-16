@@ -22,18 +22,22 @@ function changeDom(color) {
 
 var i = 0;
 var txt = "These pretzels are making me thirsty.";
-var speed = 50;
+var speed = 1;
+var stop = false;
 function typeWriter() {
+  if (stop) return;
   if (i < txt.length) {
     document.getElementById("container").innerHTML += txt.charAt(i);
     i++;
     setTimeout(typeWriter, speed);
   } else {
     i = 0;
+    typeWriter();
   }
 }
 
 function typeTime(setPhase) {
+  stop = true;
   const container = document.getElementById("container");
   container.style.height = "100%";
   container.style.width = "100%";
@@ -104,14 +108,17 @@ const Phase3 = ({ setPhase }) => {
   useEffect(() => {
     const startTime = Date.now();
     let frame;
-
+    let lastNum;
+    let rando;
+    typeWriter();
     function animate() {
       const diff = (Date.now() - startTime) * 0.1;
       if (diff % 2 === 0) {
-        document.getElementById("text").innerHTML =
-          responses[getRandomInt(0, 4)];
+        while (rando === lastNum) {
+          var rando = getRandomInt(0, 5);
+        }
+        document.getElementById("text").innerHTML = responses[rando];
         changeDom("white");
-        typeWriter();
       } else {
         changeDom("#FA7171");
       }
@@ -126,10 +133,8 @@ const Phase3 = ({ setPhase }) => {
         container.style.fontWeight = "bold";
         container.innerHTML = "";
         changeDom("white");
-        setTimeout(() => {
-          container.innerHTML = "";
-          typeTime(setPhase);
-        }, 5000);
+        container.innerHTML = "";
+        typeTime(setPhase);
         cancelAnimationFrame(frame);
       }
     }

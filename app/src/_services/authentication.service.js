@@ -7,22 +7,23 @@ const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem("currentUser"))
 );
 
-const currentWorchSubject = new BehaviorSubject(
-  JSON.parse(localStorage.getItem("worch"))
+const currentNDASubject = new BehaviorSubject(
+  JSON.parse(localStorage.getItem("nda"))
 );
 
 export const authenticationService = {
-  isWorched,
+  changeRole,
+  isNDA,
   login,
   logout,
   register,
   currentUser: currentUserSubject.asObservable(),
-  worched: currentWorchSubject.asObservable(),
+  nda: currentNDASubject.asObservable(),
   get currentUserValue() {
     return currentUserSubject.value;
   },
-  get currentWorchValue() {
-    return currentWorchSubject.value;
+  get currentNDAValue() {
+    return currentNDASubject.value;
   }
 };
 
@@ -68,7 +69,21 @@ function register(username, email, password) {
     });
 }
 
-function isWorched() {
-  localStorage.setItem("worch", true);
-  currentWorchSubject.next(true);
+function changeRole() {
+  const role = "haploid";
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ role })
+  };
+  return fetch(`${process.env.MEDENG_URL}/auth/role`, requestOptions)
+    .then(handleResponse)
+    .then(response => {
+      console.log(response);
+    });
+}
+
+function isNDA() {
+  localStorage.setItem("nda", true);
+  currentNDASubject.next(true);
 }

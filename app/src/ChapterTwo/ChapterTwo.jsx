@@ -3,10 +3,11 @@ import Phase1 from "./Phase1";
 import Phase2 from "./Phase2";
 import Phase3 from "./Phase3";
 import NDA from "./NDA";
+import { authenticationService } from "../_services/authentication.service";
 
 const ChapterTwo = ({ history }) => {
   const [phase, setPhase] = useState(1);
-
+  const isNDA = authenticationService.currentNDAValue;
   useEffect(() => {
     if (localStorage.getItem("phase")) {
       setPhase(parseInt(localStorage.getItem("phase")));
@@ -18,7 +19,12 @@ const ChapterTwo = ({ history }) => {
       document.documentElement.style.background = "black";
     };
   }, []);
-
+  if (isNDA)
+    return (
+      <div style={{ fontSize: "8rem", width: "90%", margin: "0 1rem" }}>
+        come to the party
+      </div>
+    );
   return (
     <div>
       {phase === 1 && <Phase1 setPhase={setPhase} />}

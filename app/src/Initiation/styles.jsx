@@ -111,7 +111,10 @@ export const BottomLine = styled.div`
 `;
 
 export const SporeContainer = styled.div`
+  margin-top: 1.6rem;
   canvas {
+    max-width: 300px;
+
     margin: auto;
     display: block;
   }

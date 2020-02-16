@@ -116,3 +116,10 @@ export const PosterContainer = styled.div`
   box-shadow: 10px 20px white;
   width: 93%;
 `;
+
+export const SignUpLink = styled.div`
+  text-align: center;
+  font-size: 2rem;
+  margin: -2.4rem 0;
+  text-decoration: underline;
+`;
