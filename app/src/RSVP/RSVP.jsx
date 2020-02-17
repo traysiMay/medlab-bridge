@@ -30,7 +30,8 @@ import {
   Admit,
   BottomLine
 } from "../Initiation/styles";
-const event = "raptorhole";
+
+const event = "meiosis";
 
 const Line1 = styled.div`
   text-align: center;

@@ -6,11 +6,11 @@ export const rsvpService = {
   rsvp
 };
 
-function rsvp(email) {
+function rsvp(email, event) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email })
+    body: JSON.stringify({ email, event })
   };
   return fetch(`${process.env.MEDENG_URL}/rsvp/create`, requestOptions)
     .then(handleResponse)
