@@ -83,8 +83,8 @@ const RSVP = ({ history, match }) => {
     };
   }, []);
 
-  const localQR = localStorage.getItem("qr");
-  if (qr === "" && localStorage.getItem("qr")) {
+  const localQR = localStorage.getItem(process.env.QR);
+  if (qr === "" && localStorage.getItem(process.env.QR)) {
     setQr(localQR);
   }
 
@@ -123,7 +123,9 @@ const RSVP = ({ history, match }) => {
                 you may login to your account to retrieve a ticky :D
               </Line2>
               <Link to="/login">
-                <WhiteButton>go to LOGIN!</WhiteButton>
+                <WhiteButton style={{ fontSize: "1.5rem" }}>
+                  go to LOGIN!
+                </WhiteButton>
               </Link>
             </div>
           )}
@@ -185,7 +187,7 @@ const RSVP = ({ history, match }) => {
                     // }
                     // history.push(from)
                     console.log(user);
-                    localStorage.setItem("qr", user.data);
+                    localStorage.setItem(process.env.QR, user.data);
                     localStorage.setItem("email", email);
                     setQr(user.data);
                     setMessage(user.message);

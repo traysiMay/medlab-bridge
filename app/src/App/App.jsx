@@ -29,16 +29,7 @@ const ZApp = ({ showModal, showNav, currentUser, logout }) => {
           onClick={() => {
             uiService.hideModal();
           }}
-        >
-          <ModalStyle
-            onClick={e => {
-              e.stopPropagation();
-              console.log("hey");
-            }}
-          >
-            shirmp
-          </ModalStyle>
-        </Modal>
+        ></Modal>
       )}
       <div>
         <PrivateRoute exact path="/init" component={Initiation} />

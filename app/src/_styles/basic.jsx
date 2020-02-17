@@ -83,6 +83,23 @@ export const MRow = styled.div`
   grid-column: 2;
 `;
 
+export const BlackButton = styled.div`
+  background: black;
+  height: 12rem;
+  color: white;
+  line-height: 12rem;
+  text-align: center;
+  border-radius: 6rem;
+  font-weight: bold;
+  font-size: 2.4rem;
+  width: 12rem;
+  margin: 3rem auto;
+  cursor: pointer;
+  &:hover {
+    background: red;
+  }
+`;
+
 export const WhiteButton = styled.div`
   background: white;
   height: 12rem;

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { WhiteButton } from "../_styles/basic";
 
-export const Home = () => {
+export const Home = ({ history }) => {
   const canvas = useRef();
   const clicked = useRef(false);
   const width = window.innerWidth;
@@ -51,5 +52,15 @@ export const Home = () => {
 
     return () => cancelAnimationFrame(req);
   }, []);
-  return <canvas ref={canvas} width={width} height={height}></canvas>;
+  return (
+    <div>
+      <WhiteButton
+        onClick={() => history.push("/ch2")}
+        style={{ fontSize: "1.3rem" }}
+      >
+        CHAPTER 2
+      </WhiteButton>
+      <canvas ref={canvas} width={width} height={height}></canvas>
+    </div>
+  );
 };

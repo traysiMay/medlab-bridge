@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, Fragment } from "react";
-import { ProfileContainer, Liner, MRow, WhiteButton } from "@/_styles/basic";
+import { ProfileContainer, Liner, MRow, BlackButton } from "@/_styles/basic";
 import {
   EmptyToadContainer,
   ToadContainer,
@@ -44,7 +44,7 @@ let spore;
 let shroom;
 const yes = ["YA", "SI", "HAI", "OUI", "DA", "JA", "TAK", ""];
 
-const Initiation = () => {
+const Initiation = ({ history }) => {
   let rendgar = null;
   const sixFour = useRef(null);
   const [IMG, setIMG] = useState();
@@ -53,6 +53,7 @@ const Initiation = () => {
   );
   const [toads, setToads] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("");
   const [booped, setBooped] = useState(false);
   const [QR, setQR] = useState("");
 
@@ -60,10 +61,15 @@ const Initiation = () => {
 
   const head = useRef();
   const signedNDA = authenticationService.currentNDAValue;
+
+  useEffect(() => {
+    if (!loading) setLoadingMessage("");
+  }, [loading]);
+
   const createToad = () => {
     setLoading(true);
+    setLoadingMessage("Minting your toad...");
     toadService.createToad("beta", "meiosis").then(toad => {
-      console.log(toad);
       setQR(toad.qrPng);
       getZeToads();
       setLoading(false);
@@ -81,7 +87,6 @@ const Initiation = () => {
         setCurrentUser({ ...currentUser, beta: true });
 
         web3Service.getURI(toads[0].id).then(uri => {
-          console.log(uri);
           const { r, g, b } = JSON.parse(uri);
           material.color = new Color(`rgb(${r},${g},${b})`);
           shroom.children[0].material.color = new Color(`rgb(${r},${g},${b})`);
@@ -241,7 +246,7 @@ const Initiation = () => {
     <Fragment>
       {loading && (
         <Liner>
-          <Loading />
+          <Loading loadingMessage={loadingMessage} />
         </Liner>
       )}
       {!loading && !beta && (
@@ -254,7 +259,8 @@ const Initiation = () => {
               style={{
                 transform: "rotate(90deg)",
                 gridColumn: "2/4",
-                width: "50%"
+                width: "50%",
+                cursor: "pointer"
               }}
             >
               <Liner
@@ -262,13 +268,20 @@ const Initiation = () => {
                   if (!signedNDA) {
                     return uiService.showModal(
                       <div
+                        onClick={e => {
+                          e.stopPropagation();
+                          history.push("/ch2");
+                          uiService.hideModal();
+                        }}
                         style={{
                           textAlign: "center",
                           fontSize: "1.4rem",
-                          padding: "2rem"
+                          padding: "2rem",
+                          cursor: "pointer"
                         }}
                       >
                         ay! you must go through chapter2 before minting :)
+                        <BlackButton>LETS GO</BlackButton>
                       </div>
                     );
                   }

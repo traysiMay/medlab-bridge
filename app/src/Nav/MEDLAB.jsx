@@ -27,7 +27,15 @@ export const MEDLAB = ({
           fill="#FFFFFF"
           points="378.7,53.1 361.9,53.3 353.6,38.7 362.1,23.9 378.9,23.7 387.2,38.3 	"
         />
-        <g>
+        <g onClick={goHome}>
+          <rect
+            opacity="0"
+            x="150"
+            y="5"
+            fill="#FFFFFF"
+            width="100"
+            height="100"
+          />
           <path
             fill="#FFFFFF"
             d="M175.2,32.3V5.2h8.2l4.9,18.5l4.9-18.5h8.2v27.1h-5.1V10.9L191,32.3h-5.3l-5.4-21.3v21.3H175.2z"

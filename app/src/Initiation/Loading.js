@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-export const Loading = () => {
+export const Loading = ({ loadingMessage }) => {
   const canvas = useRef();
   useEffect(() => {
     const c = canvas.current;
@@ -35,11 +35,14 @@ export const Loading = () => {
     return () => cancelAnimationFrame(req);
   }, []);
   return (
-    <canvas
-      style={{ display: "block", margin: "auto" }}
-      width="150"
-      height="150"
-      ref={canvas}
-    ></canvas>
+    <div>
+      <canvas
+        style={{ display: "block", margin: "auto" }}
+        width="150"
+        height="150"
+        ref={canvas}
+      ></canvas>
+      {loadingMessage}
+    </div>
   );
 };

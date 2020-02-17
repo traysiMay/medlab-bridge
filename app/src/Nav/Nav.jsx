@@ -56,7 +56,7 @@ const NavC = ({ currentUser, history, logout }) => {
     }
   });
   const goHome = () => {
-    history.push("/");
+    history.push("/home");
   };
 
   const onCircle = e => {

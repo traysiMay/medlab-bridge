@@ -122,4 +122,5 @@ export const SignUpLink = styled.div`
   font-size: 2rem;
   margin: -2.4rem 0;
   text-decoration: underline;
+  cursor: pointer;
 `;

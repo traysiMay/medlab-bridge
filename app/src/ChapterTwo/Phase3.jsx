@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { getRandomInt } from "./utils";
 import styled from "styled-components";
+import { surveyService } from "../_services/survey.service";
 
 const Alert = styled.div`
   position: absolute;
@@ -83,6 +84,7 @@ function typeTime(setPhase) {
       } else {
         alert.style.display = "block";
         alert.innerHTML = "well that is a weird thing to say... but ok!";
+        surveyService.sendResponse("meiosis", container.innerText);
         setTimeout(() => {
           alert.style.display = "none";
           container.innerHTML = "";
