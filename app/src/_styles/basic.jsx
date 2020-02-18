@@ -28,6 +28,7 @@ export const Heading = styled.div`
   font-weight: 800;
   border-bottom: 1rem white solid;
   width: 53%;
+  user-select: none;
 `;
 
 export const ProfileContainer = styled.div`
@@ -49,6 +50,7 @@ export const Header = styled.h1`
   text-shadow: 9px 10px 10px red;
   box-shadow: 10px 8px 20px red;
   margin-bottom: -3rem;
+  user-select: none;
 `;
 
 export const Liner = styled.div`
@@ -64,6 +66,7 @@ export const Liner = styled.div`
     color: red;
     border-bottom: 0.7rem white dashed;
   }
+  user-select: none;
 `;
 
 export const Paragraph = styled.div`
@@ -77,6 +80,7 @@ export const Paragraph = styled.div`
   grid-column: 2;
   border-bottom: 0.3rem white dashed;
   padding-bottom: 0.6rem;
+  user-select: none;
 `;
 
 export const MRow = styled.div`
