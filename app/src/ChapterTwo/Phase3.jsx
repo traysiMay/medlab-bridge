@@ -83,8 +83,15 @@ function typeTime(setPhase) {
         }, 1000);
       } else {
         alert.style.display = "block";
-        alert.innerHTML = "well that is a weird thing to say... but ok!";
-        surveyService.sendResponse("meiosis", container.innerText);
+        surveyService
+          .sendResponse("meiosis", container.innerText)
+          .then(response => {
+            if (response.message === "pretzel_saved") {
+              alert.innerHTML = "giddy up!";
+            } else {
+              alert.innerHTML = "well that is a weird thing to say... but ok!";
+            }
+          });
         setTimeout(() => {
           alert.style.display = "none";
           container.innerHTML = "";
