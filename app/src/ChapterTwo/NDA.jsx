@@ -57,7 +57,12 @@ const NDA = ({ history }) => {
       {step === 2 && (
         <RectButtonContainer>
           Monarch May 8
-          <RectButton onClick={() => history.push("/rsvp")}>
+          <RectButton
+            onClick={() => {
+              authenticationService.isNDA();
+              history.push("/rsvp");
+            }}
+          >
             RSVP by Email
           </RectButton>
           <RectButton
